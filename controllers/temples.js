@@ -13,7 +13,10 @@ const getAll = async (req, res, next) => {
       #swagger.responses[200] = {
         description: "All temple records are successfully fetched and returned in an array.",
         schema: [{
-            _id: "0123456789abcdef01234567",
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "templeId": "1",
+            "templeName": "Mount Timpanogos Utah Temple",
+            "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
           }]
       }
       #swagger.responses[500] = {
@@ -36,7 +39,10 @@ const getAll = async (req, res, next) => {
         #swagger.responses[200] = {
           description: "A single temple record identified by `id` is successfully returned.",
           schema: {
-            _id: "0123456789abcdef01234567",
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "templeId": "1",
+            "templeName": "Mount Timpanogos Utah Temple",
+            "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
           }
         }
         #swagger.responses[400] = {
@@ -64,6 +70,10 @@ const getAll = async (req, res, next) => {
           type: 'object',
           format: 'json',
           schema: {
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "templeId": "1",
+            "templeName": "Mount Timpanogos Utah Temple",
+            "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
           }
         }
         #swagger.responses[201] = {
@@ -101,6 +111,10 @@ const getAll = async (req, res, next) => {
           type: 'object',
           format: 'json',
           schema: {
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "templeId": "1",
+            "templeName": "Mount Timpanogos Utah Temple",
+            "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
           }
         }
         #swagger.responses[204] = {

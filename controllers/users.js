@@ -18,7 +18,9 @@
         #swagger.responses[200] = {
           description: "A single user record identified by `id` is successfully returned.",
           schema: {
-            _id: "0123456789abcdef01234567",
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "userName": "Joseph Smith",
+            "userPassword": "StickPuller1830"
           }
         }
         #swagger.responses[400] = {
@@ -46,6 +48,9 @@
           type: 'object',
           format: 'json',
           schema: {
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "userName": "Joseph Smith",
+            "userPassword": "StickPuller1830"
           }
         }
         #swagger.responses[201] = {
@@ -83,6 +88,9 @@
           type: 'object',
           format: 'json',
           schema: {
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "userName": "Joseph Smith",
+            "userPassword": "StickPuller1830"
           }
         }
         #swagger.responses[204] = {

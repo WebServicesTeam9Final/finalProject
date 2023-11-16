@@ -14,6 +14,15 @@ const getAll = async (req, res, next) => {
       description: "All completed records are successfully fetched and returned in an array.",
       schema: [{
           _id: "0123456789abcdef01234567",
+          fname: "Joseph",
+          lname: "Smith",
+          gender: "Male",
+          birthday: "23-Dec-1805",
+          baptism: "15-May-1829",
+          confirmation: "15-May-1829",
+          initiatory: "5-May-1842",
+          endowment: "5-May-1842",
+          sealing: "28-May-1843",
         }]
     }
     #swagger.responses[500] = {
@@ -37,6 +46,15 @@ const getOne = async (req, res, next) => {
         description: "A single completed record identified by `id` is successfully returned.",
         schema: {
           _id: "0123456789abcdef01234567",
+          fname: "Joseph",
+          lname: "Smith",
+          gender: "Male",
+          birthday: "23-Dec-1805",
+          baptism: "15-May-1829",
+          confirmation: "15-May-1829",
+          initiatory: "5-May-1842",
+          endowment: "5-May-1842",
+          sealing: "28-May-1843",
         }
       }
       #swagger.responses[400] = {
@@ -64,6 +82,16 @@ const postData = async (req, res) => {
         type: 'object',
         format: 'json',
         schema: {
+          _id: "0123456789abcdef01234567",
+          fname: "Joseph",
+          lname: "Smith",
+          gender: "Male",
+          birthday: "23-Dec-1805",
+          baptism: "15-May-1829",
+          confirmation: "15-May-1829",
+          initiatory: "5-May-1842",
+          endowment: "5-May-1842",
+          sealing: "28-May-1843",
         }
       }
       #swagger.responses[201] = {
@@ -101,6 +129,16 @@ const putData = async (req, res, next) => {
         type: 'object',
         format: 'json',
         schema: {
+          _id: "0123456789abcdef01234567",
+          fname: "Joseph",
+          lname: "Smith",
+          gender: "Male",
+          birthday: "23-Dec-1805",
+          baptism: "15-May-1829",
+          confirmation: "15-May-1829",
+          initiatory: "5-May-1842",
+          endowment: "5-May-1842",
+          sealing: "28-May-1843",
         }
       }
       #swagger.responses[204] = {

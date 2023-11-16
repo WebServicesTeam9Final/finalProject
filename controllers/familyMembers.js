@@ -14,6 +14,15 @@ const getAll = async (req, res, next) => {
         description: "All family member records are successfully fetched and returned in an array.",
         schema: [{
             _id: "0123456789abcdef01234567",
+            fname: "Joseph",
+            lname: "Smith",
+            gender: "Male",
+            birthday: "23-Dec-1805",
+            baptism: "15-May-1829",
+            confirmation: "15-May-1829",
+            initiatory: "",
+            endowment: "",
+            sealing: "",
           }]
       }
       #swagger.responses[500] = {
@@ -37,6 +46,15 @@ const getAll = async (req, res, next) => {
           description: "A single family member record identified by `id` is successfully returned.",
           schema: {
             _id: "0123456789abcdef01234567",
+            fname: "Joseph",
+            lname: "Smith",
+            gender: "Male",
+            birthday: "23-Dec-1805",
+            baptism: "15-May-1829",
+            confirmation: "15-May-1829",
+            initiatory: "",
+            endowment: "",
+            sealing: "",
           }
         }
         #swagger.responses[400] = {
@@ -64,6 +82,16 @@ const getAll = async (req, res, next) => {
           type: 'object',
           format: 'json',
           schema: {
+            _id: "0123456789abcdef01234567",
+            fname: "Joseph",
+            lname: "Smith",
+            gender: "Male",
+            birthday: "23-Dec-1805",
+            baptism: "15-May-1829",
+            confirmation: "15-May-1829",
+            initiatory: "",
+            endowment: "",
+            sealing: "",
           }
         }
         #swagger.responses[201] = {
@@ -101,6 +129,16 @@ const getAll = async (req, res, next) => {
           type: 'object',
           format: 'json',
           schema: {
+            _id: "0123456789abcdef01234567",
+            fname: "Joseph",
+            lname: "Smith",
+            gender: "Male",
+            birthday: "23-Dec-1805",
+            baptism: "15-May-1829",
+            confirmation: "15-May-1829",
+            initiatory: "",
+            endowment: "",
+            sealing: "",
           }
         }
         #swagger.responses[204] = {

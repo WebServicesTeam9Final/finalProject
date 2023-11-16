@@ -93,6 +93,42 @@
                   "_id": {
                     "type": "string",
                     "example": "0123456789abcdef01234567"
+                  },
+                  "fname": {
+                    "type": "string",
+                    "example": "Joseph"
+                  },
+                  "lname": {
+                    "type": "string",
+                    "example": "Smith"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "example": "Male"
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "example": "23-Dec-1805"
+                  },
+                  "baptism": {
+                    "type": "string",
+                    "example": "15-May-1829"
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "example": "15-May-1829"
+                  },
+                  "initiatory": {
+                    "type": "string",
+                    "example": "5-May-1842"
+                  },
+                  "endowment": {
+                    "type": "string",
+                    "example": "5-May-1842"
+                  },
+                  "sealing": {
+                    "type": "string",
+                    "example": "28-May-1843"
                   }
                 }
               },
@@ -123,7 +159,48 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Joseph"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Smith"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "23-Dec-1805"
+                },
+                "baptism": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "confirmation": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "initiatory": {
+                  "type": "string",
+                  "example": "5-May-1842"
+                },
+                "endowment": {
+                  "type": "string",
+                  "example": "5-May-1842"
+                },
+                "sealing": {
+                  "type": "string",
+                  "example": "28-May-1843"
+                }
+              }
             }
           }
         ],
@@ -185,6 +262,42 @@
                 "_id": {
                   "type": "string",
                   "example": "0123456789abcdef01234567"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Joseph"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Smith"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "23-Dec-1805"
+                },
+                "baptism": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "confirmation": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "initiatory": {
+                  "type": "string",
+                  "example": "5-May-1842"
+                },
+                "endowment": {
+                  "type": "string",
+                  "example": "5-May-1842"
+                },
+                "sealing": {
+                  "type": "string",
+                  "example": "28-May-1843"
                 }
               },
               "xml": {
@@ -228,7 +341,48 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Joseph"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Smith"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "23-Dec-1805"
+                },
+                "baptism": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "confirmation": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "initiatory": {
+                  "type": "string",
+                  "example": "5-May-1842"
+                },
+                "endowment": {
+                  "type": "string",
+                  "example": "5-May-1842"
+                },
+                "sealing": {
+                  "type": "string",
+                  "example": "28-May-1843"
+                }
+              }
             }
           }
         ],
@@ -319,6 +473,42 @@
                   "_id": {
                     "type": "string",
                     "example": "0123456789abcdef01234567"
+                  },
+                  "fname": {
+                    "type": "string",
+                    "example": "Joseph"
+                  },
+                  "lname": {
+                    "type": "string",
+                    "example": "Smith"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "example": "Male"
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "example": "23-Dec-1805"
+                  },
+                  "baptism": {
+                    "type": "string",
+                    "example": "15-May-1829"
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "example": "15-May-1829"
+                  },
+                  "initiatory": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "endowment": {
+                    "type": "string",
+                    "example": ""
+                  },
+                  "sealing": {
+                    "type": "string",
+                    "example": ""
                   }
                 }
               },
@@ -349,7 +539,48 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Joseph"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Smith"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "23-Dec-1805"
+                },
+                "baptism": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "confirmation": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "initiatory": {
+                  "type": "string",
+                  "example": ""
+                },
+                "endowment": {
+                  "type": "string",
+                  "example": ""
+                },
+                "sealing": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
             }
           }
         ],
@@ -411,6 +642,42 @@
                 "_id": {
                   "type": "string",
                   "example": "0123456789abcdef01234567"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Joseph"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Smith"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "23-Dec-1805"
+                },
+                "baptism": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "confirmation": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "initiatory": {
+                  "type": "string",
+                  "example": ""
+                },
+                "endowment": {
+                  "type": "string",
+                  "example": ""
+                },
+                "sealing": {
+                  "type": "string",
+                  "example": ""
                 }
               },
               "xml": {
@@ -454,7 +721,48 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
+                "fname": {
+                  "type": "string",
+                  "example": "Joseph"
+                },
+                "lname": {
+                  "type": "string",
+                  "example": "Smith"
+                },
+                "gender": {
+                  "type": "string",
+                  "example": "Male"
+                },
+                "birthday": {
+                  "type": "string",
+                  "example": "23-Dec-1805"
+                },
+                "baptism": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "confirmation": {
+                  "type": "string",
+                  "example": "15-May-1829"
+                },
+                "initiatory": {
+                  "type": "string",
+                  "example": ""
+                },
+                "endowment": {
+                  "type": "string",
+                  "example": ""
+                },
+                "sealing": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
             }
           }
         ],
@@ -544,7 +852,19 @@
                 "properties": {
                   "_id": {
                     "type": "string",
-                    "example": "0123456789abcdef01234567"
+                    "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                  },
+                  "templeId": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "templeName": {
+                    "type": "string",
+                    "example": "Mount Timpanogos Utah Temple"
+                  },
+                  "templeAddress": {
+                    "type": "string",
+                    "example": "742 N 900 E, American Fork, UT 84003, USA"
                   }
                 }
               },
@@ -575,7 +895,24 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                },
+                "templeId": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "templeName": {
+                  "type": "string",
+                  "example": "Mount Timpanogos Utah Temple"
+                },
+                "templeAddress": {
+                  "type": "string",
+                  "example": "742 N 900 E, American Fork, UT 84003, USA"
+                }
+              }
             }
           }
         ],
@@ -636,7 +973,19 @@
               "properties": {
                 "_id": {
                   "type": "string",
-                  "example": "0123456789abcdef01234567"
+                  "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                },
+                "templeId": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "templeName": {
+                  "type": "string",
+                  "example": "Mount Timpanogos Utah Temple"
+                },
+                "templeAddress": {
+                  "type": "string",
+                  "example": "742 N 900 E, American Fork, UT 84003, USA"
                 }
               },
               "xml": {
@@ -680,7 +1029,24 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                },
+                "templeId": {
+                  "type": "string",
+                  "example": "1"
+                },
+                "templeName": {
+                  "type": "string",
+                  "example": "Mount Timpanogos Utah Temple"
+                },
+                "templeAddress": {
+                  "type": "string",
+                  "example": "742 N 900 E, American Fork, UT 84003, USA"
+                }
+              }
             }
           }
         ],
@@ -778,7 +1144,15 @@
               "properties": {
                 "_id": {
                   "type": "string",
-                  "example": "0123456789abcdef01234567"
+                  "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "Joseph Smith"
+                },
+                "userPassword": {
+                  "type": "string",
+                  "example": "StickPuller1830"
                 }
               },
               "xml": {
@@ -822,7 +1196,20 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "Joseph Smith"
+                },
+                "userPassword": {
+                  "type": "string",
+                  "example": "StickPuller1830"
+                }
+              }
             }
           }
         ],
@@ -910,7 +1297,20 @@
             "format": "json",
             "schema": {
               "type": "object",
-              "properties": {}
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "a1b2c3d4e5f6a1b2c3d4e5f6"
+                },
+                "userName": {
+                  "type": "string",
+                  "example": "Joseph Smith"
+                },
+                "userPassword": {
+                  "type": "string",
+                  "example": "StickPuller1830"
+                }
+              }
             }
           }
         ],
