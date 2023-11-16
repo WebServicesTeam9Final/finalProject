@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "CSE-341 Team 9 Final Project",
-    "description": "finalproject v1.0.0 by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
+    "title": "CSE-341 Team 9 Final Project REST API",
+    "description": "A temple work REST API developed by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
   },
   "host": "localhost:3000",
   "basePath": "/",
@@ -19,10 +19,40 @@
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Main"
+        ],
+        "summary": "Return API name and version number.",
+        "description": "This endpoint simply returns an object containing the name of the API, version number, and author.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "description": "Returns the version information for the API.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "CSE-341 Team 9 Final Project REST API"
+                },
+                "version": {
+                  "type": "string",
+                  "example": "1.0.0"
+                },
+                "author": {
+                  "type": "string",
+                  "example": "Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error."
           }
         }
       }
@@ -74,7 +104,7 @@
       },
       "post": {
         "tags": [
-          "completed records"
+          "Completed"
         ],
         "summary": "Add a single completed record.",
         "description": "Adds a single completed record using information provided in a JSON body.",
@@ -122,7 +152,7 @@
     "/completed/{id}": {
       "get": {
         "tags": [
-          "completed records"
+          "Completed"
         ],
         "summary": "Get a single completed record.",
         "description": "Returns the completed record identified by `id` for a single family member record that has had all temple work completed.",
@@ -165,7 +195,7 @@
       },
       "put": {
         "tags": [
-          "completed records"
+          "Completed"
         ],
         "summary": "Update a single completed record.",
         "description": "Updates the completed record identified by `id` using information provided in a JSON body.",
@@ -209,7 +239,7 @@
       },
       "delete": {
         "tags": [
-          "completed records"
+          "Completed"
         ],
         "summary": "Delete a single completed record.",
         "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
@@ -248,202 +278,6 @@
           },
           "500": {
             "description": "Internal server or database error."
-          }
-        }
-      }
-    },
-    "/family-members/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/family-members/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/temples/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/temples/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/users/{id}": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "put": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      },
-      "delete": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/users/": {
-      "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
           }
         }
       }

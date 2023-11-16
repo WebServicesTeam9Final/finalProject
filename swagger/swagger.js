@@ -4,8 +4,8 @@ const swaggerAutogen = require('swagger-autogen')();
 const doc = {
   info: {
     version: About.version,      
-    title: "CSE-341 Team 9 Final Project",    
-    description: About.name + ' v' + About.version + ' by ' + About.author,
+    title: About.prettyName,    
+    description: 'A temple work REST API developed by ' + About.author,
   },
   host: '[TBD].onrender.com',   
   basePath: '/',  
