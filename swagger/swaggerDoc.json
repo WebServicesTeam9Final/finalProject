@@ -1,0 +1,452 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "CSE-341 Team 9 Final Project",
+    "description": "finalproject v1.0.0 by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api-docs/": {
+      "get": {
+        "tags": [
+          "API Documentation"
+        ],
+        "summary": "Provide documentation for this API.",
+        "description": "Executes the main Swagger documentation user interface handler.",
+        "responses": {
+          "200": {
+            "description": "A functioning web page is returned allowing the user to navigate the documentation. No JSON data is returned on this route."
+          }
+        }
+      }
+    },
+    "/completed/": {
+      "get": {
+        "tags": [
+          "Completed"
+        ],
+        "summary": "Return the entire list of completed records.",
+        "description": "Returns all completed records in the collection. No filtering is applied.",
+        "responses": {
+          "200": {
+            "description": "All completed records are successfully fetched and returned in an array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "0123456789abcdef01234567"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "completed records"
+        ],
+        "summary": "Add a single completed record.",
+        "description": "Adds a single completed record using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - A single completed record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/completed/{id}": {
+      "get": {
+        "tags": [
+          "completed records"
+        ],
+        "summary": "Get a single completed record.",
+        "description": "Returns the completed record identified by `id` for a single family member record that has had all temple work completed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a family member record that has had all temple work completed.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single completed record identified by `id` is successfully returned.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "completed records"
+        ],
+        "summary": "Update a single completed record.",
+        "description": "Updates the completed record identified by `id` using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a completed record.",
+            "format": "hex"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success - The completed record identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "completed records"
+        ],
+        "summary": "Delete a single completed record.",
+        "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a completed record.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The completed record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching completed record(s) deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "deletedCount": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/family-members/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/family-members/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/temples/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/temples/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/users/": {
+      "post": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    }
+  }
+}

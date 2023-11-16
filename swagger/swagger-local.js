@@ -1,4 +1,4 @@
-const About = require('/package.json');
+const About = require('../package.json');
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
@@ -7,7 +7,7 @@ const doc = {
     title: "CSE-341 Team 9 Final Project",    
     description: About.name + ' v' + About.version + ' by ' + About.author,
   },
-  host: '[TBD].onrender.com',   
+  host: 'localhost:3000',   
   basePath: '/',  
   schemes: ['https'],   
   consumes: ['application/json'], 
