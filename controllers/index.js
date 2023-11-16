@@ -1,5 +1,12 @@
 // ROOT Controller
-const About = require('../package.json');
+const package = require('../package.json');
+
+const About = {
+    "name": package.name,
+    "prettyName": package.prettyName,
+    "version": package.version,
+    "author": package.author
+};
 
 const defaultRoute = async(req, res) => {
   /*  #swagger.summary = 'Return API name and version number.'
@@ -8,7 +15,8 @@ const defaultRoute = async(req, res) => {
       #swagger.responses[200] = { 
         description: "Returns the version information for the API.",
         schema: {
-          name: "CSE-341 Team 9 Final Project REST API",
+          name: "finalproject",
+          prettyName: "CSE-341 Team 9 Final Project REST API",
           version: "1.0.0",
           author: "Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
         } 

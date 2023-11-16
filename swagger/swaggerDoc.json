@@ -8,7 +8,7 @@
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -34,6 +34,10 @@
               "type": "object",
               "properties": {
                 "name": {
+                  "type": "string",
+                  "example": "finalproject"
+                },
+                "prettyName": {
                   "type": "string",
                   "example": "CSE-341 Team 9 Final Project REST API"
                 },
@@ -97,6 +101,9 @@
               }
             }
           },
+          "418": {
+            "description": "I'm a teapot"
+          },
           "500": {
             "description": "Internal server or database error."
           }
@@ -139,6 +146,9 @@
                 "name": "main"
               }
             }
+          },
+          "418": {
+            "description": "I'm a teapot"
           },
           "422": {
             "description": "Invalid or missing data error."
@@ -188,6 +198,9 @@
           "404": {
             "description": "Not found."
           },
+          "418": {
+            "description": "I'm a teapot"
+          },
           "500": {
             "description": "Internal server or database error."
           }
@@ -228,6 +241,9 @@
           },
           "404": {
             "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
           },
           "422": {
             "description": "Invalid or missing data error."
@@ -275,6 +291,654 @@
           },
           "400": {
             "description": "Invalid ID provided."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/family-members/": {
+      "get": {
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Return the entire list of family member records.",
+        "description": "Returns all family member records in the collection. No filtering is applied.",
+        "responses": {
+          "200": {
+            "description": "All family member records are successfully fetched and returned in an array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "0123456789abcdef01234567"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Add a single family member record.",
+        "description": "Adds a single family member record using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - A single family member record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/family-members/{id}": {
+      "get": {
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Get a single family member record.",
+        "description": "Returns the family member record identified by `id` for a single family member record that needs temple work completed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a family member record that needs temple work completed.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single family member record identified by `id` is successfully returned.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Update a single family member record.",
+        "description": "Updates the family member record identified by `id` using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a family member record.",
+            "format": "hex"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success - The family member record identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Delete a single family member record.",
+        "description": "Deletes a family member record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a family member record was actually deleted.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a family member record.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The family member record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching family member record(s) deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "deletedCount": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/temples/": {
+      "get": {
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Return the entire list of temple records.",
+        "description": "Returns all temple records in the collection. No filtering is applied.",
+        "responses": {
+          "200": {
+            "description": "All temple records are successfully fetched and returned in an array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "0123456789abcdef01234567"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Add a single temple record.",
+        "description": "Adds a single temple record using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - A single temple record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/temples/{id}": {
+      "get": {
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Get a single temple record.",
+        "description": "Returns the temple record identified by `id` for a single temple record that needs temple work completed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a temple record that needs temple work completed.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single temple record identified by `id` is successfully returned.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Update a single temple record.",
+        "description": "Updates the temple record identified by `id` using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a temple record.",
+            "format": "hex"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success - The temple record identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Delete a single temple record.",
+        "description": "Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a temple record.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The temple record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching temple record(s) deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "deletedCount": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a single user record.",
+        "description": "Returns the user record identified by `id` for a single user record that needs user work completed.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a user record that needs user work completed.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single user record identified by `id` is successfully returned.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update a single user record.",
+        "description": "Updates the user record identified by `id` using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a user record.",
+            "format": "hex"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success - The user record identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "422": {
+            "description": "Invalid or missing data error."
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Delete a single user record.",
+        "description": "Deletes a user record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a user record was actually deleted.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a user record.",
+            "format": "hex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The user record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching user record(s) deleted.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "deletedCount": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
+    "/users/": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add a single user record.",
+        "description": "Adds a single user record using information provided in a JSON body.",
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - A single user record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "418": {
+            "description": "I'm a teapot"
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
             "description": "Internal server or database error."
