@@ -1,4 +1,4 @@
-// completed records Controller
+// Completed Records Controller
 
 // const mongoDb = require('../db/connect'); // Must connect to DB if not already.
 // const {ObjectId} = require('mongodb');
@@ -20,6 +20,7 @@ const getAll = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
+    res.status(418).json('Not yet implemented.');
 };
 
 const getOne = async (req, res, next) => {
@@ -48,6 +49,7 @@ const getOne = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
+    res.status(418).json('Not yet implemented.');
 };
 
 /////// POST ///////
@@ -78,6 +80,7 @@ const postData = async (req, res) => {
         description: 'Internal server or database error.'
       }
   */
+    res.status(418).json('Not yet implemented.');
 };
 
 /////// PUT ///////
@@ -116,6 +119,7 @@ const putData = async (req, res, next) => {
         description: "Internal server or database error.",
       }
   */
+    res.status(418).json('Not yet implemented.');
 };
 
 
@@ -144,6 +148,7 @@ const deleteData = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
+    res.status(418).json('Not yet implemented.');
 };
 
 
