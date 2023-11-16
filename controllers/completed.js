@@ -25,7 +25,7 @@ const getAll = async (req, res, next) => {
 const getOne = async (req, res, next) => {
   /*  #swagger.summary = 'Get a single completed record.'
       #swagger.description = 'Returns the completed record identified by `id` for a single family member record that has had all temple work completed.'
-      #swagger.tags = ['completed records']
+      #swagger.tags = ['Completed']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique 24-digit hexadecimal string that identifies a family member record that has had all temple work completed.',
@@ -55,7 +55,7 @@ const postData = async (req, res) => {
   console.log(`completed records/POST document: `);
   /*  #swagger.summary = 'Add a single completed record.'
       #swagger.description = 'Adds a single completed record using information provided in a JSON body.'
-      #swagger.tags = ['completed records']
+      #swagger.tags = ['Completed']
       #swagger.parameters['record'] = {
         in: 'body',
         description: 'A valid JSON object with required data elements populated.',
@@ -85,7 +85,7 @@ const putData = async (req, res, next) => {
   let response = {};
   /*  #swagger.summary = 'Update a single completed record.'
       #swagger.description = 'Updates the completed record identified by `id` using information provided in a JSON body.'
-      #swagger.tags = ['completed records']
+      #swagger.tags = ['Completed']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique 24-digit hexadecimal string that identifies a completed record.',
@@ -123,7 +123,7 @@ const putData = async (req, res, next) => {
 const deleteData = async (req, res, next) => {
   /*  #swagger.summary = 'Delete a single completed record.'
       #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
-      #swagger.tags = ['completed records']
+      #swagger.tags = ['Completed']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique 24-digit hexadecimal string that identifies a completed record.',
