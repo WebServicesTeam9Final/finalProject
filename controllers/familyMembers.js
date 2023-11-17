@@ -18,8 +18,8 @@ const addFamilyMember = async (req, res) => {
         endowment: req.body.endowment,
         sealing: req.body.sealing
     };
-    //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('ttracker').collection('familyMembers').insertOne(familyMember);
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('familyMembers').insertOne(familyMember);
     if(result.acknowledged){
         res.status(201).json(result);
     } else {
@@ -30,7 +30,7 @@ const addFamilyMember = async (req, res) => {
 //PUT
 const updateFamilyMember = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid contact id to update a person.');
+        res.status(400).json('Must use a valid id to update a person.');
     }
     const personId = new ObjectId(req.params.id);
     const updatedFamilyMember = {
@@ -44,8 +44,8 @@ const updateFamilyMember = async (req, res) => {
         endowment: req.body.endowment,
         sealing: req.body.sealing
     };
-    //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('ttracker').collection('familyMembers').replaceOne({ _id: personId }, updatedFamilyMember);
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('familyMembers').replaceOne({ _id: personId }, updatedFamilyMember);
     console.log(result)
     if(result.modifiedCount > 0){
         res.status(204).send();

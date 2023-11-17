@@ -11,8 +11,8 @@ const addTemple = async (req, res) => {
         templeName: req.body.templeName,
         templeAddress: req.body.templeAddress
     };
-    //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('ttracker').collection('temples').insertOne(temple);
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('temples').insertOne(temple);
     if(result.acknowledged){
         res.status(201).json(result);
     } else {
@@ -23,7 +23,7 @@ const addTemple = async (req, res) => {
 //PUT
 const updateTemple = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid contact id to update a temple.');
+        res.status(400).json('Must use a valid id to update a temple.');
     }
     const templeId = new ObjectId(req.params.id);
     const updatedTemple = {
@@ -31,7 +31,7 @@ const updateTemple = async (req, res) => {
         templeAddress: req.body.templeAddress
     };
     //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('ttracker').collection('temples').replaceOne({ _id: templeId }, updatedTemple);
+    const result = await mongodb.getDb().db('TempleWork').collection('temples').replaceOne({ _id: templeId }, updatedTemple);
     console.log(result)
     if(result.modifiedCount > 0){
         res.status(204).send();

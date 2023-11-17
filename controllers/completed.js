@@ -18,8 +18,8 @@ const addCompletedPerson = async (req, res) => {
         endowment: req.body.endowment,
         sealing: req.body.sealing
     };
-    //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('ttracker').collection('completed').insertOne(completed);
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('completed').insertOne(completed);
     if(result.acknowledged){
         res.status(201).json(result);
     } else {
@@ -30,7 +30,7 @@ const addCompletedPerson = async (req, res) => {
 //PUT
 const updateCompletedPerson = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid contact id to update a person.');
+        res.status(400).json('Must use a valid id to update a person.');
     }
     const personId = new ObjectId(req.params.id);
     const updatedPerson = {
@@ -44,8 +44,8 @@ const updateCompletedPerson = async (req, res) => {
         endowment: req.body.endowment,
         sealing: req.body.sealing
     };
-    //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('ttracker').collection('completed').replaceOne({ _id: personId }, updatedPerson);
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
     console.log(result)
     if(result.modifiedCount > 0){
         res.status(204).send();
