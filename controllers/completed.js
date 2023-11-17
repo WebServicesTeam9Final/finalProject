@@ -50,7 +50,7 @@ const updateCompletedPerson = async (req, res) => {
     if(result.modifiedCount > 0){
         res.status(204).send();
     } else {
-        res.status(500).json(response.error || 'An error occurred while updating the contact.');
+        res.status(500).json(response.error || 'An error occurred while updating the person.');
     }
 };
 
