@@ -95,6 +95,17 @@ const updateTemple = async (req, res) => {
   
   /////// DELETE ///////
   const deleteData = async (req, res, next) => {
+    if (!ObjectId.isValid(req.params.id)) {
+      res.status(400).json('Must use a valid id to delete a temple.');
+    }
+    const templeId = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db('TempleWork').collection('temples').deleteOne({ _id: templeId }, true);
+    console.log(result)
+    if(result.deletedCount > 0){
+        res.status(200).send();
+    } else {
+        res.status(500).json(response.error || 'An error occurred while deleting the temple.');
+    }
     /*  #swagger.summary = 'Delete a single temple record.'
         #swagger.description = 'Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.'
         #swagger.tags = ['Temples']
@@ -118,7 +129,6 @@ const updateTemple = async (req, res) => {
           description: 'Internal server or database error.'
         }
     */
-      res.status(418).json('Not yet implemented.');
   };
   
   
