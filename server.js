@@ -1,6 +1,7 @@
 const About = require('./package.json');
 const express = require("express");
 const bodyParser = require('body-parser');
+const mongodb = require("./database/connection");
 
 // const MongoClient = require('mongodb').MongoClient;
 // const mongodb = require('./db/connect');            // Contains actual connection code
@@ -21,6 +22,10 @@ console.log('\n');
 console.log(About.prettyName + ' v' + About.version + '\nby ' + About.author);
 
 
-// TODO: When the MongoDB is finally up and running and the appropriate connection code is added, 
-// this line below should be executed after it is know the DB is connected and running.
-app.listen(Port, () => console.log("Server is running. Listening on port " + Port + ".\n"));
+mongodb.initDb((err, mongodb) => {
+    if (err) {
+      console.log(err);
+    } else {
+        app.listen(Port, () => console.log("Server is running. Listening on port " + Port + ".\n"));
+    }
+});
