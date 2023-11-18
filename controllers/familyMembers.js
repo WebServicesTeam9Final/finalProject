@@ -70,95 +70,55 @@ const getAll = async (req, res, next) => {
       res.status(418).json('Not yet implemented.');
   };
   
-  /////// POST ///////
-  const postData = async (req, res) => {
-    console.log(`family member records/POST document: `);
-    /*  #swagger.summary = 'Add a single family member record.'
-        #swagger.description = 'Adds a single family member record using information provided in a JSON body.'
-        #swagger.tags = ['Family Members']
-        #swagger.parameters['record'] = {
-          in: 'body',
-          description: 'A valid JSON object with required data elements populated.',
-          type: 'object',
-          format: 'json',
-          schema: {
-            _id: "0123456789abcdef01234567",
-            fname: "Joseph",
-            lname: "Smith",
-            gender: "Male",
-            birthday: "23-Dec-1805",
-            baptism: "15-May-1829",
-            confirmation: "15-May-1829",
-            initiatory: "",
-            endowment: "",
-            sealing: "",
-          }
-        }
-        #swagger.responses[201] = {
-          description: "Created - A single family member record is added with the data given. The return result provides the newly assigned ID number.",
-          schema: {
-            acknowledged: true,
-            insertedId: '<hexadecimal string>'
-          }
-        }
-        #swagger.responses[422] = {
-          description: 'Invalid or missing data error.'
-        }
-        #swagger.responses[500] = {
-          description: 'Internal server or database error.'
-        }
-    */
-      res.status(418).json('Not yet implemented.');
-  };
-  
-  /////// PUT ///////
-  const putData = async (req, res, next) => {
-    let response = {};
-    /*  #swagger.summary = 'Update a single family member record.'
-        #swagger.description = 'Updates the family member record identified by `id` using information provided in a JSON body.'
-        #swagger.tags = ['Family Members']
-        #swagger.parameters['id'] = {
-          in: 'path',
-          description: 'A valid and unique 24-digit hexadecimal string that identifies a family member record.',
-          type: 'string',
-          format: 'hex',
-        } 
-        #swagger.parameters['record'] = {
-          in: 'body',
-          description: 'A valid JSON object populated with one or more data fields to be changed.',
-          type: 'object',
-          format: 'json',
-          schema: {
-            _id: "0123456789abcdef01234567",
-            fname: "Joseph",
-            lname: "Smith",
-            gender: "Male",
-            birthday: "23-Dec-1805",
-            baptism: "15-May-1829",
-            confirmation: "15-May-1829",
-            initiatory: "",
-            endowment: "",
-            sealing: "",
-          }
-        }
-        #swagger.responses[204] = {
-          description: "Success - The family member record identified by `id` is updated with the new data. No data is returned other than this status.",
-        }
-        #swagger.responses[400] = {
-          description: "Invalid ID provided.",
-        }
-        #swagger.responses[404] = {
-          description: "Not found.",
-        }
-        #swagger.responses[422] = {
-          description: 'Invalid or missing data error.'
-        }
-        #swagger.responses[500] = {
-          description: "Internal server or database error.",
-        }
-    */
-      res.status(418).json('Not yet implemented.');
-  };
+//POST
+const addFamilyMember = async (req, res) => {
+    const familyMember = {
+        fname: req.body.fname,
+        lname: req.body.lname,
+        gender: req.body.gender,
+        birthday: req.body.birthday,
+        baptism: req.body.baptism,
+        confirmation: req.body.confirmation,
+        initiatory: req.body.initiatory,
+        endowment: req.body.endowment,
+        sealing: req.body.sealing
+    };
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('familyMembers').insertOne(familyMember);
+    if(result.acknowledged){
+        res.status(201).json(result);
+    } else {
+        res.status(500).json(response.error || 'An error occurred while creating the person.');
+    }
+};
+
+//PUT
+const updateFamilyMember = async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid id to update a person.');
+    }
+    const personId = new ObjectId(req.params.id);
+    const updatedFamilyMember = {
+        fname: req.body.fname,
+        lname: req.body.lname,
+        gender: req.body.gender,
+        birthday: req.body.birthday,
+        baptism: req.body.baptism,
+        confirmation: req.body.confirmation,
+        initiatory: req.body.initiatory,
+        endowment: req.body.endowment,
+        sealing: req.body.sealing
+    };
+    //db name subject to change after mongodb setup
+    const result = await mongodb.getDb().db('TempleWork').collection('familyMembers').replaceOne({ _id: personId }, updatedFamilyMember);
+    console.log(result)
+    if(result.modifiedCount > 0){
+        res.status(204).send();
+    } else {
+        res.status(500).json(response.error || 'An error occurred while updating the person.');
+    }
+};
+
   
   
   /////// DELETE ///////
@@ -193,7 +153,7 @@ const getAll = async (req, res, next) => {
   module.exports = {
     getAll,
     getOne,
-    postData,
-    putData,
+    addFamilyMember,
+    updateFamilyMember,
     deleteData
   };
