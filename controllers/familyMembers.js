@@ -120,34 +120,43 @@ const updateFamilyMember = async (req, res) => {
 };
 
   
-  
-  /////// DELETE ///////
-  const deleteData = async (req, res, next) => {
-    /*  #swagger.summary = 'Delete a single family member record.'
-        #swagger.description = 'Deletes a family member record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a family member record was actually deleted.'
-        #swagger.tags = ['Family Members']
-        #swagger.parameters['id'] = {
-          in: 'path',
-          description: 'A valid and unique 24-digit hexadecimal string that identifies a family member record.',
-          type: 'string',
-          format: 'hex',
-        } 
-        #swagger.responses[200] = {
-          description: "The family member record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching family member record(s) deleted.",
-          schema: {
-            acknowledged: true,
-            deletedCount: 1
-          }
+/////// DELETE ///////
+const deleteData = async (req, res, next) => {
+    if (!ObjectId.isValid(req.params.id)) {
+        res.status(400).json('Must use a valid id to delete a person.');
+    }
+    const personId = new ObjectId(req.params.id);
+    const result = await mongodb.getDb().db('TempleWork').collection('familyMembers').deleteOne({ _id: personId }, true);
+    console.log(result)
+    if(result.deletedCount > 0){
+        res.status(200).send();
+    } else {
+        res.status(500).json(response.error || 'An error occurred while deleting the person.');
+    }
+    /*  #swagger.summary = 'Delete a single completed record.'
+      #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
+      #swagger.tags = ['Completed']
+      #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'A valid and unique 24-digit hexadecimal string that identifies a completed record.',
+        type: 'string',
+        format: 'hex',
+      } 
+      #swagger.responses[200] = {
+        description: "The completed record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching completed record(s) deleted.",
+        schema: {
+          acknowledged: true,
+          deletedCount: 1
         }
-        #swagger.responses[400] = {
-          description: "Invalid ID provided.",
-        }
-        #swagger.responses[500] = {
-          description: 'Internal server or database error.'
-        }
-    */
-      res.status(418).json('Not yet implemented.');
-  };
+      }
+      #swagger.responses[400] = {
+        description: "Invalid ID provided.",
+      }
+      #swagger.responses[500] = {
+        description: 'Internal server or database error.'
+      }
+  */
+};
   
   
   module.exports = {
