@@ -2,14 +2,25 @@
   "name": "finalproject",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "server.js"
+    "start": "nodemon server.js",
+    "dev-swagger-gen": "node ./swagger/swagger-local.js",
+    "swagger-gen": "node ./swagger/swagger.js"
   },
   "keywords": [],
-  "author": "",
+  "prettyName": "CSE-341 Team 9 Final Project REST API",
+  "author": "Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "swagger-ui-express": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "swagger-autogen": "^2.23.7"
   }
 }

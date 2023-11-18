@@ -1,9 +1,74 @@
-const mongodb = require('../database/connection');
-const ObjectId = require('mongodb').ObjectId;
+// Completed Records Controller
 
-//GET ALL
+// const mongoDb = require('../db/connect'); // Must connect to DB if not already.
+// const {ObjectId} = require('mongodb');
+// const collection = 'Completed';
 
-//GET SINGLE
+/////// GET ///////
+const getAll = async (req, res, next) => {
+  /*
+    #swagger.summary = 'Return the entire list of completed records.'
+    #swagger.description = 'Returns all completed records in the collection. No filtering is applied.'
+    #swagger.tags = ['Completed']
+    #swagger.responses[200] = {
+      description: "All completed records are successfully fetched and returned in an array.",
+      schema: [{
+          _id: "0123456789abcdef01234567",
+          fname: "Joseph",
+          lname: "Smith",
+          gender: "Male",
+          birthday: "23-Dec-1805",
+          baptism: "15-May-1829",
+          confirmation: "15-May-1829",
+          initiatory: "5-May-1842",
+          endowment: "5-May-1842",
+          sealing: "28-May-1843",
+        }]
+    }
+    #swagger.responses[500] = {
+        description: 'Internal server or database error.'
+      }
+  */
+    res.status(418).json('Not yet implemented.');
+};
+
+const getOne = async (req, res, next) => {
+  /*  #swagger.summary = 'Get a single completed record.'
+      #swagger.description = 'Returns the completed record identified by `id` for a single family member record that has had all temple work completed.'
+      #swagger.tags = ['Completed']
+      #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'A valid and unique 24-digit hexadecimal string that identifies a family member record that has had all temple work completed.',
+        type: 'string',
+        format: 'hex'
+      }
+      #swagger.responses[200] = {
+        description: "A single completed record identified by `id` is successfully returned.",
+        schema: {
+          _id: "0123456789abcdef01234567",
+          fname: "Joseph",
+          lname: "Smith",
+          gender: "Male",
+          birthday: "23-Dec-1805",
+          baptism: "15-May-1829",
+          confirmation: "15-May-1829",
+          initiatory: "5-May-1842",
+          endowment: "5-May-1842",
+          sealing: "28-May-1843",
+        }
+      }
+      #swagger.responses[400] = {
+        description: 'Invalid ID provided.'
+      }
+      #swagger.responses[404] = {
+        description: "Not found.",
+      }
+      #swagger.responses[500] = {
+        description: 'Internal server or database error.'
+      }
+  */
+    res.status(418).json('Not yet implemented.');
+};
 
 //POST
 const addCompletedPerson = async (req, res) => {
@@ -54,6 +119,41 @@ const updateCompletedPerson = async (req, res) => {
     }
 };
 
-//DELETE
 
-module.exports = { addCompletedPerson, updateCompletedPerson };
+/////// DELETE ///////
+const deleteData = async (req, res, next) => {
+  /*  #swagger.summary = 'Delete a single completed record.'
+      #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
+      #swagger.tags = ['Completed']
+      #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'A valid and unique 24-digit hexadecimal string that identifies a completed record.',
+        type: 'string',
+        format: 'hex',
+      } 
+      #swagger.responses[200] = {
+        description: "The completed record identified by `id` is deleted from the collection if it exists. The response is an object containing an aknowledgement and the number of matching completed record(s) deleted.",
+        schema: {
+          acknowledged: true,
+          deletedCount: 1
+        }
+      }
+      #swagger.responses[400] = {
+        description: "Invalid ID provided.",
+      }
+      #swagger.responses[500] = {
+        description: 'Internal server or database error.'
+      }
+  */
+    res.status(418).json('Not yet implemented.');
+};
+
+
+module.exports = {
+  getAll,
+  getOne,
+  deleteData,
+  addCompletedPerson, 
+  updateCompletedPerson
+};
+=======

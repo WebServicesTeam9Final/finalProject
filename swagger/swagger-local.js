@@ -1,4 +1,4 @@
-const About = require('/package.json');
+const About = require('../package.json');
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
@@ -7,9 +7,9 @@ const doc = {
     title: About.prettyName,    
     description: 'A temple work REST API developed by ' + About.author,
   },
-  host: '[TBD].onrender.com',   
+  host: 'localhost:3000',   
   basePath: '/',  
-  schemes: ['https'],   
+  schemes: ['http'],   
   consumes: ['application/json'], 
   produces: ['application/json'], 
   tags: [],
