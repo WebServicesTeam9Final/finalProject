@@ -7,7 +7,7 @@ const doc = {
     title: About.prettyName,    
     description: 'A temple work REST API developed by ' + About.author,
   },
-  host: '[TBD].onrender.com',   
+  host: 'finalwebservices.onrender.com',   
   basePath: '/',  
   schemes: ['https'],   
   consumes: ['application/json'], 
