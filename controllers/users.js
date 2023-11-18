@@ -70,8 +70,8 @@ const updateUser = async (req, res) => {
     }
 };
   
-  /////// DELETE ///////
-  const deleteData = async (req, res, next) => {
+/////// DELETE ///////
+const deleteData = async (req, res, next) => {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json('Must use a valid id to delete user.');
     }
