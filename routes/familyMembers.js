@@ -7,8 +7,8 @@ const familyMembersCtrl = require('../controllers/familyMembers');
 // Allow All Read/Write Access
 routes.get('/', familyMembersCtrl.getAll);
 routes.get('/:id', familyMembersCtrl.getOne);
-routes.post('/', familyMembersCtrl.postData);
-routes.put('/:id', familyMembersCtrl.putData);
+routes.post('/', familyMembersCtrl.addFamilyMember);
+routes.put('/:id', familyMembersCtrl.updateFamilyMember);
 routes.delete('/:id', familyMembersCtrl.deleteData);
 
 module.exports = routes;

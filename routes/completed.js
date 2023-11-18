@@ -7,8 +7,8 @@ const completedCtrl = require('../controllers/completed');
 // Allow All Read/Write Access
 routes.get('/', completedCtrl.getAll);
 routes.get('/:id', completedCtrl.getOne);
-routes.post('/', completedCtrl.postData);
-routes.put('/:id', completedCtrl.putData);
+routes.post('/', completedCtrl.addCompletedPerson);
+routes.put('/:id', completedCtrl.updateCompletedPerson);
 routes.delete('/:id', completedCtrl.deleteData);
 
 module.exports = routes;

@@ -7,8 +7,8 @@ const templesCtrl = require('../controllers/temples');
 // Allow All Read/Write Access
 routes.get('/', templesCtrl.getAll);
 routes.get('/:id', templesCtrl.getOne);
-routes.post('/', templesCtrl.postData);
-routes.put('/:id', templesCtrl.putData);
+routes.post('/', templesCtrl.addTemple);
+routes.put('/:id', templesCtrl.updateTemple);
 routes.delete('/:id', templesCtrl.deleteData);
 
 module.exports = routes;

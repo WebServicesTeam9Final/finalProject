@@ -9,8 +9,8 @@ const usersCtrl = require('../controllers/users');
 // Doesn't appear we have a "GET ALL" planned for this collection.
 // routes.get('/', usersCtrl.getAll); 
 routes.get('/:id', usersCtrl.getOne);
-routes.post('/', usersCtrl.postData);
-routes.put('/:id', usersCtrl.putData);
+routes.post('/', usersCtrl.addUser);
+routes.put('/:id', usersCtrl.addUser);
 routes.delete('/:id', usersCtrl.deleteData);
 
 module.exports = routes;
