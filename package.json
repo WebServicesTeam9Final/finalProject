@@ -1,5 +1,5 @@
 {
-  "name": "finalproject",
+  "name": "templetracker",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "swagger-gen": "node ./swagger/swagger.js"
   },
   "keywords": [],
-  "prettyName": "CSE-341 Team 9 Final Project REST API",
+  "prettyName": "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
   "author": "Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis",
   "license": "ISC",
   "dependencies": {
