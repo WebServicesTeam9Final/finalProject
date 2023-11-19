@@ -1,4 +1,4 @@
-const About = require('/package.json');
+const About = require('../package.json');
 const swaggerAutogen = require('swagger-autogen')();
 
 const doc = {
