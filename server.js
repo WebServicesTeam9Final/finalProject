@@ -3,9 +3,6 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const mongodb = require("./database/connection");
 
-// const MongoClient = require('mongodb').MongoClient;
-// const mongodb = require('./db/connect');            // Contains actual connection code
-
 const cors = require('cors');
 
 const app = express();
