@@ -1,7 +1,7 @@
 // Family Member Records Controller
 
-// const mongoDb = require('../db/connect'); // Must connect to DB if not already.
-// const {ObjectId} = require('mongodb');
+const mongodb = require('../database/connection');
+const {ObjectId} = require('mongodb');
 // const collection = 'Family Member';
 
 /////// GET ///////
