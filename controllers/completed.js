@@ -2,7 +2,7 @@
 
 const mongodb = require('../database/connection');
 const {ObjectId} = require('mongodb');
-// const collection = 'Completed';
+const collection = 'completed';
 
 /////// GET ///////
 const getAll = async (req, res, next) => {
@@ -29,7 +29,24 @@ const getAll = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
-    res.status(418).json('Not yet implemented.');
+  console.log(`railroads/GET ALL: `);
+  try {
+    const result = await mongoDb.getDb()
+      .db()
+      .collection(collection)
+      .find();
+    
+    result.toArray()
+      .then( (lists) => {
+        console.log(`    200 - OK`);
+        res.setHeader('Content-Type', 'application/json');  
+        res.status(200).json(lists); 
+      });
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
+    res.status(500).send('Internal server or database error.');
+    return false;
+  }
 };
 
 const getOne = async (req, res, next) => {

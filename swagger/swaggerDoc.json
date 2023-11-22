@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "CSE-341 Team 9 Final Project REST API",
+    "version": "1.0.1",
+    "title": "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
     "description": "A temple work REST API developed by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
   },
-  "host": "finalwebservices.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -82,6 +82,9 @@
         ],
         "summary": "Return the entire list of completed records.",
         "description": "Returns all completed records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "All completed records are successfully fetched and returned in an array.",
@@ -136,9 +139,6 @@
                 "name": "main"
               }
             }
-          },
-          "418": {
-            "description": "I'm a teapot"
           },
           "500": {
             "description": "Internal server or database error."
