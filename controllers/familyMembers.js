@@ -135,7 +135,7 @@ const deleteData = async (req, res, next) => {
     }
     /*  #swagger.summary = 'Delete a single completed record.'
       #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
-      #swagger.tags = ['Completed']
+      #swagger.tags = ['Family Members']
       #swagger.parameters['id'] = {
         in: 'path',
         description: 'A valid and unique 24-digit hexadecimal string that identifies a completed record.',

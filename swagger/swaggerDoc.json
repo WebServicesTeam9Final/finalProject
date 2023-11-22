@@ -146,40 +146,59 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Completed"
+        ],
+        "summary": "Add a single completed record.",
+        "description": "Adds a single completed record using information provided in a JSON body.",
         "parameters": [
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
                 "fname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph"
                 },
                 "lname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Smith"
                 },
                 "gender": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Male"
                 },
                 "birthday": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "23-Dec-1805"
                 },
                 "baptism": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "confirmation": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "initiatory": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "endowment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "sealing": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "28-May-1843"
                 }
               }
             }
@@ -187,10 +206,29 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - A single completed record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       }
@@ -202,6 +240,9 @@
         ],
         "summary": "Get a single completed record.",
         "description": "Returns the completed record identified by `id` for a single family member record that has had all temple work completed.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -279,46 +320,67 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Completed"
+        ],
+        "summary": "Update a single completed record.",
+        "description": "Updates the completed record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a completed record.",
+            "format": "hex"
           },
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "0123456789abcdef01234567"
+                },
                 "fname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph"
                 },
                 "lname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Smith"
                 },
                 "gender": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Male"
                 },
                 "birthday": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "23-Dec-1805"
                 },
                 "baptism": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "confirmation": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "initiatory": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "endowment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "sealing": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "28-May-1843"
                 }
               }
             }
@@ -326,13 +388,19 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Success - The completed record identified by `id` is updated with the new data. No data is returned other than this status."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       },
@@ -644,7 +712,7 @@
       },
       "delete": {
         "tags": [
-          "Completed"
+          "Family Members"
         ],
         "summary": "Delete a single completed record.",
         "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
