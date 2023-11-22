@@ -1,6 +1,6 @@
 // Completed Records Controller
 
-const mongodb = require('../database/connection');
+const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
 const collection = 'completed';
 
@@ -170,7 +170,7 @@ const addCompletedPerson = async (req, res) => {
       sealing: req.body.sealing
   };
   //db name subject to change after mongodb setup
-  const result = await mongodb.getDb().db('TempleWork').collection('completed').insertOne(completed);
+  const result = await mongoDb.getDb().db('TempleWork').collection('completed').insertOne(completed);
   if(result.acknowledged){
       res.status(201).json(result);
   } else {
@@ -240,7 +240,7 @@ const updateCompletedPerson = async (req, res) => {
       sealing: req.body.sealing
   };
   //db name subject to change after mongodb setup
-  const result = await mongodb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
+  const result = await mongoDb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
   console.log(result)
   if(result.modifiedCount > 0){
       res.status(204).send();
@@ -279,7 +279,7 @@ const deleteData = async (req, res, next) => {
       res.status(400).json('Must use a valid id to delete a person.');
   }
   const personId = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('TempleWork').collection('completed').deleteOne({ _id: personId }, true);
+  const result = await mongoDb.getDb().db('TempleWork').collection('completed').deleteOne({ _id: personId }, true);
   console.log(result)
   if(result.deletedCount > 0){
       res.status(200).send();

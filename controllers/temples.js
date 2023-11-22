@@ -60,6 +60,36 @@ const getAll = async (req, res, next) => {
   
   /////// POST ///////
 const addTemple = async (req, res) => {
+  console.log(`temple records/POST document: `);
+    /*  #swagger.summary = 'Add a single temple record.'
+        #swagger.description = 'Adds a single temple record using information provided in a JSON body.'
+        #swagger.tags = ['Temples']
+        #swagger.parameters['record'] = {
+          in: 'body',
+          description: 'A valid JSON object with required data elements populated.',
+          type: 'object',
+          format: 'json',
+          schema: {
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "templeId": "1",
+            "templeName": "Mount Timpanogos Utah Temple",
+            "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
+          }
+        }
+        #swagger.responses[201] = {
+          description: "Created - A single temple record is added with the data given. The return result provides the newly assigned ID number.",
+          schema: {
+            acknowledged: true,
+            insertedId: '<hexadecimal string>'
+          }
+        }
+        #swagger.responses[422] = {
+          description: 'Invalid or missing data error.'
+        }
+        #swagger.responses[500] = {
+          description: 'Internal server or database error.'
+        }
+    */
     const temple = {
         templeName: req.body.templeName,
         templeAddress: req.body.templeAddress
@@ -75,6 +105,43 @@ const addTemple = async (req, res) => {
 
   /////// PUT ///////
 const updateTemple = async (req, res) => {
+  /*  #swagger.summary = 'Update a single temple record.'
+        #swagger.description = 'Updates the temple record identified by `id` using information provided in a JSON body.'
+        #swagger.tags = ['Temples']
+        #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'A valid and unique 24-digit hexadecimal string that identifies a temple record.',
+          type: 'string',
+          format: 'hex',
+        } 
+        #swagger.parameters['record'] = {
+          in: 'body',
+          description: 'A valid JSON object populated with one or more data fields to be changed.',
+          type: 'object',
+          format: 'json',
+          schema: {
+            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+            "templeId": "1",
+            "templeName": "Mount Timpanogos Utah Temple",
+            "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
+          }
+        }
+        #swagger.responses[204] = {
+          description: "Success - The temple record identified by `id` is updated with the new data. No data is returned other than this status.",
+        }
+        #swagger.responses[400] = {
+          description: "Invalid ID provided.",
+        }
+        #swagger.responses[404] = {
+          description: "Not found.",
+        }
+        #swagger.responses[422] = {
+          description: 'Invalid or missing data error.'
+        }
+        #swagger.responses[500] = {
+          description: "Internal server or database error.",
+        }
+    */
     if (!ObjectId.isValid(req.params.id)) {
         res.status(400).json('Must use a valid id to update a temple.');
     }
