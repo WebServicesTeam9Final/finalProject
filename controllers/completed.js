@@ -85,7 +85,7 @@ const getOne = async (req, res, next) => {
       }
   */
   const paddedId = req.params.id.padStart(24,'0');
-  console.log(`railroads/GET document ${paddedId}:`);
+  console.log(`completed/GET document ${paddedId}:`);
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
@@ -117,7 +117,6 @@ const getOne = async (req, res, next) => {
     res.status(500).send('Internal server or database error.');
     return false;
   }
-    res.status(418).json('Not yet implemented.');
 };
 
 //POST
