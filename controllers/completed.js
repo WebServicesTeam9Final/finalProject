@@ -29,7 +29,7 @@ const getAll = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
-  console.log(`railroads/GET ALL: `);
+  console.log(`completed/GET ALL: `);
   try {
     const result = await mongoDb.getDb()
       .db()
@@ -139,18 +139,7 @@ const updateCompletedPerson = async (req, res) => {
 
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
-    if (!ObjectId.isValid(req.params.id)) {
-        res.status(400).json('Must use a valid id to delete a person.');
-    }
-    const personId = new ObjectId(req.params.id);
-    const result = await mongodb.getDb().db('TempleWork').collection('completed').deleteOne({ _id: personId }, true);
-    console.log(result)
-    if(result.deletedCount > 0){
-        res.status(200).send();
-    } else {
-        res.status(500).json(response.error || 'An error occurred while deleting the person.');
-    }
-    /*  #swagger.summary = 'Delete a single completed record.'
+  /*  #swagger.summary = 'Delete a single completed record.'
       #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
       #swagger.tags = ['Completed']
       #swagger.parameters['id'] = {
@@ -173,6 +162,17 @@ const deleteData = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
+  if (!ObjectId.isValid(req.params.id)) {
+      res.status(400).json('Must use a valid id to delete a person.');
+  }
+  const personId = new ObjectId(req.params.id);
+  const result = await mongodb.getDb().db('TempleWork').collection('completed').deleteOne({ _id: personId }, true);
+  console.log(result)
+  if(result.deletedCount > 0){
+      res.status(200).send();
+  } else {
+      res.status(500).json(response.error || 'An error occurred while deleting the person.');
+  }  
 };
 
 
