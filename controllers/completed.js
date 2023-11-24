@@ -29,7 +29,7 @@ const getAll = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
-  console.log(`completed/GET ALL: `);
+  console.log(`${collection}/GET ALL: `);
   try {
     const result = await mongoDb.getDb()
       .db()
@@ -85,7 +85,7 @@ const getOne = async (req, res, next) => {
       }
   */
   const paddedId = req.params.id.padStart(24,'0');
-  console.log(`completed/GET document ${paddedId}:`);
+  console.log(`${collection}/GET document ${paddedId}:`);
   if (!ObjectId.isValid(req.params.id)) {
     console.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
@@ -119,9 +119,9 @@ const getOne = async (req, res, next) => {
   }
 };
 
-//POST
+/////// POST //////
 const addCompletedPerson = async (req, res) => {
-  console.log(`completed/POST document: `);
+  console.log(`${collection}/POST document: `);
   /*  #swagger.summary = 'Add a single completed record.'
       #swagger.description = 'Adds a single completed record using information provided in a JSON body.'
       #swagger.tags = ['Completed']
@@ -131,7 +131,6 @@ const addCompletedPerson = async (req, res) => {
         type: 'object',
         format: 'json',
         schema: {
-          _id: "0123456789abcdef01234567",
           fname: "Joseph",
           lname: "Smith",
           gender: "Male",
@@ -177,9 +176,9 @@ const addCompletedPerson = async (req, res) => {
   }
 };
 
-//PUT
+/////// PUT ///////
 const updateCompletedPerson = async (req, res) => {
-  console.log('completed/PUT: ');
+  console.log(`${collection}/PUT: `);
   /*  #swagger.summary = 'Update a single completed record.'
       #swagger.description = 'Updates the completed record identified by `id` using information provided in a JSON body.'
       #swagger.tags = ['Completed']
@@ -195,7 +194,6 @@ const updateCompletedPerson = async (req, res) => {
         type: 'object',
         format: 'json',
         schema: {
-          _id: "0123456789abcdef01234567",
           fname: "Joseph",
           lname: "Smith",
           gender: "Male",
@@ -251,6 +249,8 @@ const updateCompletedPerson = async (req, res) => {
 
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
+  // TODO: Need to resolve the difference between the documentation and actual behavior.
+  console.log(`${collection}/DELETE: `);
   /*  #swagger.summary = 'Delete a single completed record.'
       #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
       #swagger.tags = ['Completed']
