@@ -1,0 +1,36 @@
+//////////////////////////////////////////////////////////////////////////
+/////////////////////////  LOCALHOST COLLECTION  /////////////////////////
+//////////////////////////////////////////////////////////////////////////
+
+
+//// ALL GET ROUTES
+### Returns a default message - no data.
+GET http://localhost:3000/ HTTP/1.1
+
+### Read and return all COMPLETED in collection.
+GET http://localhost:3000/completed HTTP/1.1
+
+### Read and return a single COMPLETED specified by ID.
+GET http://localhost:3000/completed/655e5ced7f5764418dbb68df HTTP/1.1
+
+### Read and return all FAMILY MEMBERS in collection.
+GET http://localhost:3000/family-members/ HTTP/1.1
+
+### Read and return a single FAMILY MEMBER specified by ID.
+GET http://localhost:3000/family-members/6560efe30f5030a9076c2d0d HTTP/1.1
+
+### Read and return all TEMPLES in collection.
+GET http://localhost:3000/temples/ HTTP/1.1
+
+### Read and return a single TEMPLE specified by ID.
+GET http://localhost:3000/temples/6560f0160f5030a9076c2d0e HTTP/1.1
+
+### Read and return all USERS in collection.
+// (Error, there is no GET ALL route.)
+GET http://localhost:3000/users/ HTTP/1.1
+
+### Read and return a single USER specified by ID.
+GET http://localhost:3000/users/6560f03c0f5030a9076c2d0f HTTP/1.1
+
+
+
