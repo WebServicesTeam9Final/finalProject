@@ -70,7 +70,6 @@ const addTemple = async (req, res) => {
           type: 'object',
           format: 'json',
           schema: {
-            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
             "templeId": "1",
             "templeName": "Mount Timpanogos Utah Temple",
             "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
@@ -120,7 +119,6 @@ const updateTemple = async (req, res) => {
           type: 'object',
           format: 'json',
           schema: {
-            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
             "templeId": "1",
             "templeName": "Mount Timpanogos Utah Temple",
             "templeAddress": "742 N 900 E, American Fork, UT 84003, USA"
