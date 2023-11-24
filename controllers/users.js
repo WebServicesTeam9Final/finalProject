@@ -1,4 +1,5 @@
 // User Records Controller
+// DO NOT DELETE SWAGGER DOCUMENTATION.
 
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
@@ -174,6 +175,7 @@ const updateUser = async (req, res) => {
   }
 };
   
+
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
   /*SWAGGER DOCUMENTATION  

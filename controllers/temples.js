@@ -1,4 +1,5 @@
 // Temple Records Controller
+// DO NOT DELETE SWAGGER DOCUMENTATION
 
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
@@ -156,6 +157,7 @@ const addTemple = async (req, res) => {
   }
 };
 
+
 /////// PUT ///////
 const updateTemple = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
@@ -215,6 +217,7 @@ const updateTemple = async (req, res) => {
   }
 };
   
+
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
   // TODO: Need to resolve the difference between the documentation and actual behavior.

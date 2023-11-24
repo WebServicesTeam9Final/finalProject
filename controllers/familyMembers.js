@@ -1,5 +1,5 @@
 // Family Member Records Controller
-// DO NOT REMOVE SWAGGER DOCUMENTATION
+// DO NOT DELETE SWAGGER DOCUMENTATION
 
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');

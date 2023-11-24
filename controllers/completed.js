@@ -1,4 +1,5 @@
 // Completed Records Controller
+// DO NOT DELETE SWAGGER DOCUMENTATION
 
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
