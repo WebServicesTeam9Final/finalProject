@@ -170,9 +170,11 @@ const addCompletedPerson = async (req, res) => {
   //db name subject to change after mongodb setup
   const result = await mongoDb.getDb().db('TempleWork').collection('completed').insertOne(completed);
   if(result.acknowledged){
-      res.status(201).json(result);
+    console.log(`    201 - Success`);
+    res.status(201).json(result);
   } else {
-      res.status(500).json(response.error || 'An error occurred while creating the person.');
+    console.log(`    500 - Error: ${response.error}`);
+    res.status(500).json('An error occurred while creating the person.');
   }
 };
 
