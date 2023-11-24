@@ -160,10 +160,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "0123456789abcdef01234567"
-                },
                 "fname": {
                   "type": "string",
                   "example": "Joseph"
@@ -339,10 +335,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "0123456789abcdef01234567"
-                },
                 "fname": {
                   "type": "string",
                   "example": "Joseph"
@@ -453,6 +445,9 @@
         ],
         "summary": "Return the entire list of family member records.",
         "description": "Returns all family member records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "All family member records are successfully fetched and returned in an array.",
@@ -508,9 +503,6 @@
               }
             }
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
@@ -531,10 +523,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "0123456789abcdef01234567"
-                },
                 "fname": {
                   "type": "string",
                   "example": "Joseph"
@@ -611,6 +599,9 @@
         ],
         "summary": "Get a single family member record.",
         "description": "Returns the family member record identified by `id` for a single family member record that needs temple work completed.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -679,9 +670,6 @@
           "404": {
             "description": "Not found."
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
@@ -710,10 +698,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "_id": {
-                  "type": "string",
-                  "example": "0123456789abcdef01234567"
-                },
                 "fname": {
                   "type": "string",
                   "example": "Joseph"
