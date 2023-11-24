@@ -1,8 +1,8 @@
 // Temple Records Controller
 
-const mongodb = require('../database/connection');
+const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
-// const collection = 'temples';
+const collection = 'temples';
 
 /////// GET ///////
 const getAll = async (req, res, next) => {
@@ -23,7 +23,24 @@ const getAll = async (req, res, next) => {
           description: 'Internal server or database error.'
         }
     */
-      res.status(418).json('Not yet implemented.');
+    console.log(`${collection}/GET ALL: `);
+    try {
+      const result = await mongoDb.getDb()
+        .db()
+        .collection(collection)
+        .find();
+      
+      result.toArray()
+        .then( (lists) => {
+          console.log(`    200 - OK`);
+          res.setHeader('Content-Type', 'application/json');  
+          res.status(200).json(lists); 
+        });
+    } catch (err) {
+      console.log(`    500 - ${err.name}: ${err.message}`);
+      res.status(500).send('Internal server or database error.');
+      return false;
+    }
   };
   
   const getOne = async (req, res, next) => {
@@ -55,7 +72,39 @@ const getAll = async (req, res, next) => {
           description: 'Internal server or database error.'
         }
     */
-      res.status(418).json('Not yet implemented.');
+    const paddedId = req.params.id.padStart(24,'0');
+    console.log(`${collection}/GET document ${paddedId}:`);
+    if (!ObjectId.isValid(req.params.id)) {
+      console.log('    400 - Invalid ID provided.');
+      res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+      return false;
+    }
+    
+    const myObjId = new ObjectId(paddedId); 
+  
+    try {
+      const result = await mongoDb.getDb()
+        .db()
+        .collection(collection)
+        .findOne( {"_id": myObjId }
+      );
+        
+      if (result) {
+        console.log(`    200 - OK`);
+        res.setHeader('Content-Type', 'application/json');  
+        res.status(200).json(result); 
+      } else {
+        console.log(`    404 - Not found.`);
+        if (!res.headersSent) {
+          res.setHeader('Content-Type', 'text/plain');  
+          res.status(404).send('Not found.');  
+        }
+      }
+    } catch (err) {
+      console.log(`    500 - ${err}`);
+      res.status(500).send('Internal server or database error.');
+      return false;
+    }
   };
   
   /////// POST ///////
@@ -94,7 +143,7 @@ const addTemple = async (req, res) => {
         templeAddress: req.body.templeAddress
     };
     //db name subject to change after mongodb setup
-    const result = await mongodb.getDb().db('TempleWork').collection('temples').insertOne(temple);
+    const result = await mongoDb.getDb().db('TempleWork').collection('temples').insertOne(temple);
     if(result.acknowledged){
         res.status(201).json(result);
     } else {
@@ -149,7 +198,7 @@ const updateTemple = async (req, res) => {
         templeAddress: req.body.templeAddress
     };
     //db name subject to change after mongodb setup, is ttracker for now
-    const result = await mongodb.getDb().db('TempleWork').collection('temples').replaceOne({ _id: templeId }, updatedTemple);
+    const result = await mongoDb.getDb().db('TempleWork').collection('temples').replaceOne({ _id: templeId }, updatedTemple);
     console.log(result)
     if(result.modifiedCount > 0){
         res.status(204).send();
@@ -164,7 +213,7 @@ const updateTemple = async (req, res) => {
       res.status(400).json('Must use a valid id to delete a temple.');
     }
     const templeId = new ObjectId(req.params.id);
-    const result = await mongodb.getDb().db('TempleWork').collection('temples').deleteOne({ _id: templeId }, true);
+    const result = await mongoDb.getDb().db('TempleWork').collection('temples').deleteOne({ _id: templeId }, true);
     console.log(result)
     if(result.deletedCount > 0){
         res.status(200).send();
