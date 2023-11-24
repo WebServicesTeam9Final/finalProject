@@ -2,42 +2,74 @@
 
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
-// const collection = 'users';
+const collection = 'users';
 
 /////// GET ///////
-  const getOne = async (req, res, next) => {
-    /*  #swagger.summary = 'Get a single user record.'
-        #swagger.description = 'Returns the user record identified by `id` for a single user record that needs user work completed.'
-        #swagger.tags = ['Users']
-        #swagger.parameters['id'] = {
-          in: 'path',
-          description: 'A valid and unique 24-digit hexadecimal string that identifies a user record that needs user work completed.',
-          type: 'string',
-          format: 'hex'
+// Not doing a GET ALL on Users for now. 
+const getOne = async (req, res, next) => {
+  /*  #swagger.summary = 'Get a single user record.'
+      #swagger.description = 'Returns the user record identified by `id` for a single user record that needs user work completed.'
+      #swagger.tags = ['Users']
+      #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'A valid and unique 24-digit hexadecimal string that identifies a user record that needs user work completed.',
+        type: 'string',
+        format: 'hex'
+      }
+      #swagger.responses[200] = {
+        description: "A single user record identified by `id` is successfully returned.",
+        schema: {
+          "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
+          "userName": "Joseph Smith",
+          "userPassword": "StickPuller1830"
         }
-        #swagger.responses[200] = {
-          description: "A single user record identified by `id` is successfully returned.",
-          schema: {
-            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
-            "userName": "Joseph Smith",
-            "userPassword": "StickPuller1830"
-          }
-        }
-        #swagger.responses[400] = {
-          description: 'Invalid ID provided.'
-        }
-        #swagger.responses[404] = {
-          description: "Not found.",
-        }
-        #swagger.responses[500] = {
-          description: 'Internal server or database error.'
-        }
-    */
-      res.status(418).json('Not yet implemented.');
-  };
+      }
+      #swagger.responses[400] = {
+        description: 'Invalid ID provided.'
+      }
+      #swagger.responses[404] = {
+        description: "Not found.",
+      }
+      #swagger.responses[500] = {
+        description: 'Internal server or database error.'
+      }
+  */
+  const paddedId = req.params.id.padStart(24,'0');
+  console.log(`${collection}/GET document ${paddedId}:`);
+  if (!ObjectId.isValid(req.params.id)) {
+    console.log('    400 - Invalid ID provided.');
+    res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
+  }
   
-  /////// POST ///////
-//POST
+  const myObjId = new ObjectId(paddedId); 
+
+  try {
+    const result = await mongoDb.getDb()
+      .db()
+      .collection(collection)
+      .findOne( {"_id": myObjId }
+    );
+      
+    if (result) {
+      console.log(`    200 - OK`);
+      res.setHeader('Content-Type', 'application/json');  
+      res.status(200).json(result); 
+    } else {
+      console.log(`    404 - Not found.`);
+      if (!res.headersSent) {
+        res.setHeader('Content-Type', 'text/plain');  
+        res.status(404).send('Not found.');  
+      }
+    }
+  } catch (err) {
+    console.log(`    500 - ${err}`);
+    res.status(500).send('Internal server or database error.');
+    return false;
+  }
+};
+  
+/////// POST ///////
 const addUser = async (req, res) => {
   /*  #swagger.summary = 'Add a single user record.'
         #swagger.description = 'Adds a single user record using information provided in a JSON body.'
@@ -48,7 +80,6 @@ const addUser = async (req, res) => {
           type: 'object',
           format: 'json',
           schema: {
-            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
             "userName": "Joseph Smith",
             "userPassword": "StickPuller1830"
           }
@@ -96,7 +127,6 @@ const updateUser = async (req, res) => {
           type: 'object',
           format: 'json',
           schema: {
-            "_id": "a1b2c3d4e5f6a1b2c3d4e5f6",
             "userName": "Joseph Smith",
             "userPassword": "StickPuller1830"
           }
