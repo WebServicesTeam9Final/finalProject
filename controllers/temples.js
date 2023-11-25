@@ -24,6 +24,7 @@ const getAll = async (req, res, next) => {
         description: 'Internal server or database error.'
       }
   */
+  
   console.log(`${collection}/GET ALL: `);
   try {
     const result = await mongoDb.getDb()

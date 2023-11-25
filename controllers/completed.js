@@ -87,6 +87,7 @@ const getOne = async (req, res, next) => {
       description: 'Internal server or database error.'
     }
   */
+  
   const paddedId = req.params.id.padStart(24,'0');
   console.log(`${collection}/GET document ${paddedId}:`);
   if (!ObjectId.isValid(req.params.id)) {
