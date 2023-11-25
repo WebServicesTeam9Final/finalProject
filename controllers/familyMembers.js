@@ -117,7 +117,7 @@ const getOne = async (req, res, next) => {
       }
     }
   } catch (err) {
-    console.log(`    500 - ${err}`);
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).send('Internal server or database error.');
     return false;
   }
@@ -179,7 +179,7 @@ const addFamilyMember = async (req, res) => {
   if(result.acknowledged){
       res.status(201).json(result);
   } else {
-      res.status(500).json(response.error || 'An error occurred while creating the person.');
+    res.status(500).json('An error occurred while creating the person.');
   }
 };
 
@@ -250,9 +250,9 @@ const updateFamilyMember = async (req, res) => {
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: personId }, updatedFamilyMember);
   console.log(result)
   if(result.modifiedCount > 0){
-      res.status(204).send();
+    res.status(204).send();
   } else {
-      res.status(500).json(response.error || 'An error occurred while updating the person.');
+    res.status(500).json('An error occurred while updating the person.');
   }
 };
 
@@ -293,9 +293,9 @@ const deleteData = async (req, res, next) => {
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).deleteOne({ _id: personId }, true);
   console.log(result)
   if(result.deletedCount > 0){
-      res.status(200).send();
+    res.status(200).send();
   } else {
-      res.status(500).json(response.error || 'An error occurred while deleting the person.');
+    res.status(500).json('An error occurred while deleting the person.');
   }
   
 };

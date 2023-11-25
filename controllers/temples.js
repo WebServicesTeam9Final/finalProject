@@ -104,7 +104,7 @@ const getOne = async (req, res, next) => {
       }
     }
   } catch (err) {
-    console.log(`    500 - ${err}`);
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).send('Internal server or database error.');
     return false;
   }
@@ -145,15 +145,15 @@ const addTemple = async (req, res) => {
 
   console.log(`${collection}/POST document:`);
   const temple = {
-      templeName: req.body.templeName,
-      templeAddress: req.body.templeAddress
+    templeName: req.body.templeName,
+    templeAddress: req.body.templeAddress
   };
   //db name subject to change after mongodb setup
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).insertOne(temple);
   if(result.acknowledged){
-      res.status(201).json(result);
+    res.status(201).json(result);
   } else {
-      res.status(500).json(response.error || 'An error occurred while creating the temple.');
+    res.status(500).json(response.error || 'An error occurred while creating the temple.');
   }
 };
 
@@ -204,16 +204,16 @@ const updateTemple = async (req, res) => {
   }
   const templeId = new ObjectId(req.params.id);
   const updatedTemple = {
-      templeName: req.body.templeName,
-      templeAddress: req.body.templeAddress
+    templeName: req.body.templeName,
+    templeAddress: req.body.templeAddress
   };
   //db name subject to change after mongodb setup, is ttracker for now
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: templeId }, updatedTemple);
   console.log(result)
   if(result.modifiedCount > 0){
-      res.status(204).send();
+    res.status(204).send();
   } else {
-      res.status(500).json(response.error || 'An error occurred while updating the temple.');
+    res.status(500).json(response.error || 'An error occurred while updating the temple.');
   }
 };
   
@@ -254,9 +254,9 @@ const deleteData = async (req, res, next) => {
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).deleteOne({ _id: templeId }, true);
   console.log(result)
   if(result.deletedCount > 0){
-      res.status(200).send();
+    res.status(200).send();
   } else {
-      res.status(500).json(response.error || 'An error occurred while deleting the temple.');
+    res.status(500).json(response.error || 'An error occurred while deleting the temple.');
   }
 };
   

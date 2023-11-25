@@ -66,7 +66,7 @@ const getOne = async (req, res, next) => {
       }
     }
   } catch (err) {
-    console.log(`    500 - ${err}`);
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).send('Internal server or database error.');
     return false;
   }
@@ -106,14 +106,14 @@ const addUser = async (req, res) => {
 
   console.log(`${collection}/POST document:`);
   const user = {
-      userName: req.body.userName,
-      userPassword: req.body.userPassword
+    userName: req.body.userName,
+    userPassword: req.body.userPassword
   };
   const result = await mongoDb.getDb().db('TempleWork').collection('users').insertOne(user);
   if(result.acknowledged){
-      res.status(201).json(result);
+    res.status(201).json(result);
   } else {
-      res.status(500).json(response.error || 'An error occurred while creating the user.');
+    res.status(500).json(response.error || 'An error occurred while creating the user.');
   }
 };
 
@@ -163,15 +163,15 @@ const updateUser = async (req, res) => {
   }
   const userId = new ObjectId(req.params.id);
   const updatedUser = {
-      userName: req.body.userName,
-      userPassword: req.body.userPassword
+    userName: req.body.userName,
+    userPassword: req.body.userPassword
   };
   const result = await mongoDb.getDb().db('TempleWork').collection('users').replaceOne({ _id: userId }, updatedUser);
   console.log(result)
   if(result.modifiedCount > 0){
-      res.status(204).send();
+    res.status(204).send();
   } else {
-      res.status(500).json(response.error || 'An error occurred while updating the user.');
+    res.status(500).json(response.error || 'An error occurred while updating the user.');
   }
 };
   
@@ -211,9 +211,9 @@ const deleteData = async (req, res, next) => {
   const result = await mongoDb.getDb().db('TempleWork').collection('users').deleteOne({ _id: userId }, true);
   console.log(result)
   if(result.deletedCount > 0){
-      res.status(200).send();
+    res.status(200).send();
   } else {
-      res.status(500).json(response.error || 'An error occurred while deleting the user.');
+    res.status(500).json(response.error || 'An error occurred while deleting the user.');
   }   
 };
   

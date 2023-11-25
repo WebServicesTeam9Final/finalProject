@@ -5,10 +5,10 @@
     "title": "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
     "description": "A temple work REST API developed by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
   },
-  "host": "localhost:3000",
+  "host": "finalwebservices.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
