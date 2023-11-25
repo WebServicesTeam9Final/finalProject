@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
-    "title": "CSE-341 Team 9 Final Project REST API",
+    "version": "1.0.2",
+    "title": "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
     "description": "A temple work REST API developed by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
   },
-  "host": "finalwebservices.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "consumes": [
     "application/json"
@@ -82,6 +82,9 @@
         ],
         "summary": "Return the entire list of completed records.",
         "description": "Returns all completed records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "All completed records are successfully fetched and returned in an array.",
@@ -137,49 +140,61 @@
               }
             }
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Completed"
+        ],
+        "summary": "Add a single completed record.",
+        "description": "Adds a single completed record using information provided in a JSON body.",
         "parameters": [
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
                 "fname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph"
                 },
                 "lname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Smith"
                 },
                 "gender": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Male"
                 },
                 "birthday": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "23-Dec-1805"
                 },
                 "baptism": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "confirmation": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "initiatory": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "endowment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "sealing": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "28-May-1843"
                 }
               }
             }
@@ -187,10 +202,29 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - A single completed record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       }
@@ -202,6 +236,9 @@
         ],
         "summary": "Get a single completed record.",
         "description": "Returns the completed record identified by `id` for a single family member record that has had all temple work completed.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -270,55 +307,69 @@
           "404": {
             "description": "Not found."
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Completed"
+        ],
+        "summary": "Update a single completed record.",
+        "description": "Updates the completed record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a completed record.",
+            "format": "hex"
           },
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
                 "fname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph"
                 },
                 "lname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Smith"
                 },
                 "gender": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Male"
                 },
                 "birthday": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "23-Dec-1805"
                 },
                 "baptism": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "confirmation": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "initiatory": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "endowment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "5-May-1842"
                 },
                 "sealing": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "28-May-1843"
                 }
               }
             }
@@ -326,13 +377,19 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Success - The completed record identified by `id` is updated with the new data. No data is returned other than this status."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       },
@@ -388,6 +445,9 @@
         ],
         "summary": "Return the entire list of family member records.",
         "description": "Returns all family member records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "All family member records are successfully fetched and returned in an array.",
@@ -443,49 +503,61 @@
               }
             }
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Add a single family member record.",
+        "description": "Adds a single family member record using information provided in a JSON body.",
         "parameters": [
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
                 "fname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph"
                 },
                 "lname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Smith"
                 },
                 "gender": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Male"
                 },
                 "birthday": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "23-Dec-1805"
                 },
                 "baptism": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "confirmation": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "initiatory": {
-                  "example": "any"
+                  "type": "string",
+                  "example": ""
                 },
                 "endowment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": ""
                 },
                 "sealing": {
-                  "example": "any"
+                  "type": "string",
+                  "example": ""
                 }
               }
             }
@@ -493,10 +565,29 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - A single family member record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       }
@@ -508,6 +599,9 @@
         ],
         "summary": "Get a single family member record.",
         "description": "Returns the family member record identified by `id` for a single family member record that needs temple work completed.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -576,55 +670,69 @@
           "404": {
             "description": "Not found."
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Family Members"
+        ],
+        "summary": "Update a single family member record.",
+        "description": "Updates the family member record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a family member record.",
+            "format": "hex"
           },
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
                 "fname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph"
                 },
                 "lname": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Smith"
                 },
                 "gender": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Male"
                 },
                 "birthday": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "23-Dec-1805"
                 },
                 "baptism": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "confirmation": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "15-May-1829"
                 },
                 "initiatory": {
-                  "example": "any"
+                  "type": "string",
+                  "example": ""
                 },
                 "endowment": {
-                  "example": "any"
+                  "type": "string",
+                  "example": ""
                 },
                 "sealing": {
-                  "example": "any"
+                  "type": "string",
+                  "example": ""
                 }
               }
             }
@@ -632,19 +740,25 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Success - The family member record identified by `id` is updated with the new data. No data is returned other than this status."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       },
       "delete": {
         "tags": [
-          "Completed"
+          "Family Members"
         ],
         "summary": "Delete a single completed record.",
         "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
@@ -694,6 +808,9 @@
         ],
         "summary": "Return the entire list of temple records.",
         "description": "Returns all temple records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "All temple records are successfully fetched and returned in an array.",
@@ -725,28 +842,37 @@
               }
             }
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Add a single temple record.",
+        "description": "Adds a single temple record using information provided in a JSON body.",
         "parameters": [
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
+                "templeId": {
+                  "type": "string",
+                  "example": "1"
+                },
                 "templeName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Mount Timpanogos Utah Temple"
                 },
                 "templeAddress": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "742 N 900 E, American Fork, UT 84003, USA"
                 }
               }
             }
@@ -754,10 +880,29 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - A single temple record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       }
@@ -769,6 +914,9 @@
         ],
         "summary": "Get a single temple record.",
         "description": "Returns the temple record identified by `id` for a single temple record that needs temple work completed.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -813,34 +961,45 @@
           "404": {
             "description": "Not found."
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Temples"
+        ],
+        "summary": "Update a single temple record.",
+        "description": "Updates the temple record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a temple record.",
+            "format": "hex"
           },
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
+                "templeId": {
+                  "type": "string",
+                  "example": "1"
+                },
                 "templeName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Mount Timpanogos Utah Temple"
                 },
                 "templeAddress": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "742 N 900 E, American Fork, UT 84003, USA"
                 }
               }
             }
@@ -848,13 +1007,19 @@
         ],
         "responses": {
           "204": {
-            "description": "No Content"
+            "description": "Success - The temple record identified by `id` is updated with the new data. No data is returned other than this status."
           },
           "400": {
-            "description": "Bad Request"
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       },
@@ -910,6 +1075,9 @@
         ],
         "summary": "Get a single user record.",
         "description": "Returns the user record identified by `id` for a single user record that needs user work completed.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -950,16 +1118,17 @@
           "404": {
             "description": "Not found."
           },
-          "418": {
-            "description": "I'm a teapot"
-          },
           "500": {
             "description": "Internal server or database error."
           }
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add a single user record.",
+        "description": "Adds a single user record using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
@@ -968,16 +1137,20 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
                 "userName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph Smith"
                 },
                 "userPassword": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "StickPuller1830"
                 }
               }
             }
@@ -985,10 +1158,29 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - A single user record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       },
@@ -1039,19 +1231,27 @@
     },
     "/users/": {
       "post": {
-        "description": "",
+        "tags": [
+          "Users"
+        ],
+        "summary": "Add a single user record.",
+        "description": "Adds a single user record using information provided in a JSON body.",
         "parameters": [
           {
-            "name": "body",
+            "name": "record",
             "in": "body",
+            "description": "A valid JSON object with required data elements populated.",
+            "format": "json",
             "schema": {
               "type": "object",
               "properties": {
                 "userName": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Joseph Smith"
                 },
                 "userPassword": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "StickPuller1830"
                 }
               }
             }
@@ -1059,10 +1259,29 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - A single user record is added with the data given. The return result provides the newly assigned ID number.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "acknowledged": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "insertedId": {
+                  "type": "string",
+                  "example": "<hexadecimal string>"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid or missing data error."
           },
           "500": {
-            "description": "Internal Server Error"
+            "description": "Internal server or database error."
           }
         }
       }
