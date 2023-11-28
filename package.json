@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --coverage",
     "dev-swagger-gen": "node ./swagger/swagger-local.js",
     "swagger-gen": "node ./swagger/swagger.js"
   },
@@ -23,6 +24,7 @@
   "devDependencies": {
     "jest": "^29.7.0",
     "nodemon": "^3.0.1",
+    "supertest": "^6.3.3",
     "swagger-autogen": "^2.23.7"
   }
 }
