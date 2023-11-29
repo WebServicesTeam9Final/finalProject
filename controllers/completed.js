@@ -299,7 +299,7 @@ const deleteData = async (req, res, next) => {
   try {
     const result = await mongoDb.getDb()
       .db('TempleWork')
-      .collection('completed')
+      .collection(collection)
       .deleteOne(
         { _id: personId }
         , true

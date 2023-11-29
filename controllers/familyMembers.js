@@ -1,6 +1,7 @@
 // Family Member Records Controller
 // DO NOT DELETE SWAGGER DOCUMENTATION
 
+const tools = require('../tools');
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
 const collection = 'familyMembers';
@@ -285,18 +286,35 @@ const deleteData = async (req, res, next) => {
     }
   */
 
-  console.log(`${collection}/DELETE document ${req.params.id}:`);
-  if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid id to delete a person.');
-  }
-  const personId = new ObjectId(req.params.id);
-  const result = await mongoDb.getDb().db('TempleWork').collection(collection).deleteOne({ _id: personId }, true);
-  console.log(result)
-  if(result.deletedCount > 0){
-    res.status(200).send();
-  } else {
-    res.status(500).json('An error occurred while deleting the person.');
-  }
+    const paddedId = req.params.id.padStart(24,'0');
+    tools.log(`${collection}/DELETE document ${paddedId}:`);
+    
+    if (!ObjectId.isValid(req.params.id)) {
+      console.log('    400 - Invalid ID provided.');
+      res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+      return false;
+    }
+    const personId = new ObjectId(paddedId);
+  
+    try {
+      const result = await mongoDb.getDb()
+        .db('TempleWork')
+        .collection(collection)
+        .deleteOne(
+          { _id: personId }
+          , true
+        );
+  
+      if(result) {
+        tools.log(`    200 - Success - Documents deleted = ${result.deletedCount}`);
+        res.setHeader('Content-Type', 'application/json'); 
+        res.status(200).json(result);
+      }
+    } catch (err) {
+      console.log(`    500 - ${err.message}`);
+      res.status(500).json('An error occurred while deleting the data.');
+      return false;
+    }  
   
 };
   
