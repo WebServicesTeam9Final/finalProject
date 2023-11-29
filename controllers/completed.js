@@ -1,6 +1,7 @@
 // Completed Records Controller
 // DO NOT DELETE SWAGGER DOCUMENTATION
 
+const tools = require('../tools');
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
 const collection = 'completed';
@@ -31,7 +32,7 @@ const getAll = async (req, res, next) => {
       }
   */
   
-  console.log(`${collection}/GET ALL: `);
+  tools.log(`${collection}/GET ALL: `);
   try {
     const result = await mongoDb.getDb()
       .db()
@@ -40,13 +41,14 @@ const getAll = async (req, res, next) => {
     
     result.toArray()
       .then( (lists) => {
-        console.log(`    200 - OK`);
+        tools.log(`    200 - OK`);
         res.setHeader('Content-Type', 'application/json');  
         res.status(200).json(lists); 
       });
   } catch (err) {
-    console.log(`    500 - ${err.name}: ${err.message}`);
-    res.status(500).send('Internal server or database error.');
+    tools.log(`    500 - ${err.name}: ${err.message}`);
+    res.setHeader('Content-Type', 'application/json');
+    res.status(500).json('Internal server or database error.');
     return false;
   }
 };
@@ -89,9 +91,9 @@ const getOne = async (req, res, next) => {
   */
   
   const paddedId = req.params.id.padStart(24,'0');
-  console.log(`${collection}/GET document ${paddedId}:`);
+  tools.log(`${collection}/GET document ${paddedId}:`);
   if (!ObjectId.isValid(req.params.id)) {
-    console.log('    400 - Invalid ID provided.');
+    tools.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
     return false;
   }
@@ -106,18 +108,18 @@ const getOne = async (req, res, next) => {
     );
       
     if (result) {
-      console.log(`    200 - OK`);
+      tools.log(`    200 - OK`);
       res.setHeader('Content-Type', 'application/json');  
       res.status(200).json(result); 
     } else {
-      console.log(`    404 - Not found.`);
+      tools.log(`    404 - Not found.`);
       if (!res.headersSent) {
         res.setHeader('Content-Type', 'text/plain');  
         res.status(404).send('Not found.');  
       }
     }
   } catch (err) {
-    console.log(`    500 - ${err.name}: ${err.message}`);
+    tools.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).send('Internal server or database error.');
     return false;
   }
@@ -162,7 +164,7 @@ const addCompletedPerson = async (req, res) => {
     }
   */
 
-  console.log(`${collection}/POST document: `);
+  tools.log(`${collection}/POST document: `);
   const completed = {
       fname: req.body.fname,
       lname: req.body.lname,
@@ -230,7 +232,7 @@ const updateCompletedPerson = async (req, res) => {
     }
   */
 
-  console.log(`${collection}/PUT document ${req.params.id}:`);
+  tools.log(`${collection}/PUT document ${req.params.id}:`);
   if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json('Must use a valid id to update a person.');
   }
@@ -248,7 +250,7 @@ const updateCompletedPerson = async (req, res) => {
   };
   //db name subject to change after mongodb setup
   const result = await mongoDb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
-  console.log(result)
+  tools.log(result)
   if(result.modifiedCount > 0){
     res.status(204).send();
   } else {
@@ -285,13 +287,13 @@ const deleteData = async (req, res, next) => {
     }
   */
 
-  console.log(`${collection}/DELETE document ${req.params.id}:`);  
+  tools.log(`${collection}/DELETE document ${req.params.id}:`);  
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid id to delete a person.');
   }
   const personId = new ObjectId(req.params.id);
   const result = await mongoDb.getDb().db('TempleWork').collection('completed').deleteOne({ _id: personId }, true);
-  console.log(result)
+  tools.log(result)
   if(result.deletedCount > 0){
     res.status(200).send();
   } else {

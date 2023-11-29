@@ -1,11 +1,12 @@
 // ROOT Controller
-const package = require('../package.json');
+const packageInfo = require('../package.json');
+const tools = require('../tools');
 
 const About = {
-    "name": package.name,
-    "prettyName": package.prettyName,
-    "version": package.version,
-    "author": package.author
+    "name": packageInfo.name,
+    "prettyName": packageInfo.prettyName,
+    "version": packageInfo.version,
+    "author": packageInfo.author
 };
 
 const defaultRoute = async(req, res) => {
@@ -25,11 +26,11 @@ const defaultRoute = async(req, res) => {
         description: "Internal server error.",
       }
   */
-  console.log('/GET API VERSION');
+  tools.log('/GET API VERSION');
   try {
     res.setHeader('Content-Type', 'application/json');  
     res.status(200).json(About);
-    console.log('    200 - OK');
+    tools.log('    200 - OK');
   } catch (err) {
     res.setHeader('Content-Type', 'application/text');  
     res.status(500).send('Internal server error.');
