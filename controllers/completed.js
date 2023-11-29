@@ -261,7 +261,6 @@ const updateCompletedPerson = async (req, res) => {
 
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
-  // TODO: Need to resolve the difference between the documentation and actual behavior.
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Delete a single completed record.'
     #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
@@ -287,17 +286,34 @@ const deleteData = async (req, res, next) => {
     }
   */
 
-  tools.log(`${collection}/DELETE document ${req.params.id}:`);  
+  const paddedId = req.params.id.padStart(24,'0');
+  tools.log(`${collection}/DELETE document ${paddedId}:`);
+  
   if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid id to delete a person.');
+    console.log('    400 - Invalid ID provided.');
+    res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+    return false;
   }
-  const personId = new ObjectId(req.params.id);
-  const result = await mongoDb.getDb().db('TempleWork').collection('completed').deleteOne({ _id: personId }, true);
-  tools.log(result)
-  if(result.deletedCount > 0){
-    res.status(200).send();
-  } else {
-    res.status(500).json('An error occurred while deleting the person.');
+  const personId = new ObjectId(paddedId);
+
+  try {
+    const result = await mongoDb.getDb()
+      .db('TempleWork')
+      .collection('completed')
+      .deleteOne(
+        { _id: personId }
+        , true
+      );
+
+    if(result) {
+      tools.log(`    200 - Success - Documents deleted = ${result.deletedCount}`);
+      res.setHeader('Content-Type', 'application/json'); 
+      res.status(200).json(result);
+    }
+  } catch (err) {
+    console.log(`    500 - ${err.message}`);
+    res.status(500).json('An error occurred while deleting the data.');
+    return false;
   }  
 };
 
