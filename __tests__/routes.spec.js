@@ -5,7 +5,7 @@ const { expect } = require('@jest/globals');
 const request = superTest(serverApp);
 
 
-describe('** Test Non-REST API Endpoint Routes **', () => {
+describe('Test Miscelleneous Endpoint Routes', () => {
 
     let connection;
     let _db;
@@ -19,7 +19,7 @@ describe('** Test Non-REST API Endpoint Routes **', () => {
         await connection.close();
     });
 
-    describe ('- Test ROOT enpoint route', () => {
+    describe ('Test /[ROOT] enpoint route:', () => {
         test(' - Responds to GET /', async () => {
             const res = await request.get('/');
             expect(res.header['content-type']).toBe('application/json; charset=utf-8');
@@ -27,7 +27,7 @@ describe('** Test Non-REST API Endpoint Routes **', () => {
         });
     });
 
-    describe('- Test API-DOCS endpoint route', () => {
+    describe('Test /API-DOCS endpoint route:', () => {
         test(' - Responds to GET /api-docs/', async () => {
             const res = await request.get('/api-docs/');
             expect(res.header['content-type']).toBe('text/html; charset=utf-8');
