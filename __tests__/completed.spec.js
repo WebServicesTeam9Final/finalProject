@@ -35,7 +35,7 @@ const putData = {
 // This will hold the added test document ID so that it can be updated and later deleted. 
 // Net result should be zero documents added to the collection.
 // More in-depth testing would test to make sure the data is in the expected format.
-let returnId = "[HEX_OBJ_ID]";
+let returnId = "[OBJECT_ID]";
 
 describe('Test /COMPLETED Endpoint Routes:', () => {
 
