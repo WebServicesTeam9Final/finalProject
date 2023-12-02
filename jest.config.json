@@ -1,0 +1,4 @@
+{
+    "modulePathIgnorePatterns": ["no_test"],
+    "verbose": true
+}
