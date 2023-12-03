@@ -1,4 +1,5 @@
 const About = require('./package.json');
+const tools = require('./tools');
 const express = require("express");
 const bodyParser = require('body-parser');
 const mongodb = require("./database/connection");
@@ -15,15 +16,18 @@ app.use(bodyParser.json());
 app .use(cors())
     .use('/', require('./routes'));
 
-console.log('\n');
-console.log(About.prettyName + ' v' + About.version + '\nby ' + About.author);
-
+tools.info('\n');
+tools.info(About.prettyName + ' v' + About.version + '\nby ' + About.author);
 
 mongodb.initDb((err, mongodb) => {
     if (err) {
-      console.log(err);
+      console.info(err);
     } else {
-        console.log('MongoDB connected.');
-        app.listen(Port, () => console.log("Server is running. Listening on port " + Port + ".\n"));
+        tools.info('MongoDB connected.');
+        if (process.env.npm_lifecycle_event !== "test") {
+            app.listen(Port, () => tools.info(`Server is running. Listening on port ${Port}\n`));
+        }
     }
 });
+
+module.exports = app;

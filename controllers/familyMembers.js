@@ -1,8 +1,10 @@
 // Family Member Records Controller
 // DO NOT DELETE SWAGGER DOCUMENTATION
 
+const tools = require('../tools');
 const mongoDb = require('../database/connection');
 const {ObjectId} = require('mongodb');
+const routeName = 'family-members';
 const collection = 'familyMembers';
 
 /////// GET ///////
@@ -31,7 +33,7 @@ const getAll = async (req, res, next) => {
       }
   */
 
-  console.log(`${collection}/GET ALL: `);
+  tools.log(`${routeName}/GET ALL: `);
   try {
     const result = await mongoDb.getDb()
       .db()
@@ -40,7 +42,7 @@ const getAll = async (req, res, next) => {
     
     result.toArray()
       .then( (lists) => {
-        console.log(`    200 - OK`);
+        tools.log(`    200 - OK`);
         res.setHeader('Content-Type', 'application/json');  
         res.status(200).json(lists); 
       });
@@ -89,9 +91,9 @@ const getOne = async (req, res, next) => {
   */
 
   const paddedId = req.params.id.padStart(24,'0');
-  console.log(`${collection}/GET document ${paddedId}:`);
+  tools.log(`${collection}/GET document ${paddedId}:`);
   if (!ObjectId.isValid(req.params.id)) {
-    console.log('    400 - Invalid ID provided.');
+    tools.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
     return false;
   }
@@ -106,11 +108,11 @@ const getOne = async (req, res, next) => {
     );
       
     if (result) {
-      console.log(`    200 - OK`);
+      tools.log(`    200 - OK`);
       res.setHeader('Content-Type', 'application/json');  
       res.status(200).json(result); 
     } else {
-      console.log(`    404 - Not found.`);
+      tools.log(`    404 - Not found.`);
       if (!res.headersSent) {
         res.setHeader('Content-Type', 'text/plain');  
         res.status(404).send('Not found.');  
@@ -162,7 +164,7 @@ const addFamilyMember = async (req, res) => {
     }
   */
 
-  console.log(`${collection}/POST: `);
+  tools.log(`${collection}/POST: `);
   const familyMember = {
       fname: req.body.fname,
       lname: req.body.lname,
@@ -177,8 +179,10 @@ const addFamilyMember = async (req, res) => {
   //db name subject to change after mongodb setup
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).insertOne(familyMember);
   if(result.acknowledged){
+      tools.log('    201 - SUCCESS');
       res.status(201).json(result);
   } else {
+    console.log(`    500 - Internal server error.`);
     res.status(500).json('An error occurred while creating the person.');
   }
 };
@@ -230,8 +234,9 @@ const updateFamilyMember = async (req, res) => {
     }
   */
 
-  console.log(`${collection}/PUT document ${req.params.id}:`);
+  tools.log(`${collection}/PUT document ${req.params.id}:`);
   if (!ObjectId.isValid(req.params.id)) {
+      tools.log('    400 - Invalid ID provided.');
       res.status(400).json('Must use a valid id to update a person.');
   }
   const personId = new ObjectId(req.params.id);
@@ -248,10 +253,11 @@ const updateFamilyMember = async (req, res) => {
   };
   //db name subject to change after mongodb setup
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: personId }, updatedFamilyMember);
-  console.log(result)
   if(result.modifiedCount > 0){
+    tools.log('    204 - SUCCESS');
     res.status(204).send();
   } else {
+    console.log('    500 - Internal server error.')
     res.status(500).json('An error occurred while updating the person.');
   }
 };
@@ -259,7 +265,6 @@ const updateFamilyMember = async (req, res) => {
   
 /////// DELETE ///////
 const deleteData = async (req, res, next) => {
-  // TODO: Need to resolve the difference between the documentation and actual behavior.
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Delete a single completed record.'
     #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
@@ -285,18 +290,35 @@ const deleteData = async (req, res, next) => {
     }
   */
 
-  console.log(`${collection}/DELETE document ${req.params.id}:`);
-  if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid id to delete a person.');
-  }
-  const personId = new ObjectId(req.params.id);
-  const result = await mongoDb.getDb().db('TempleWork').collection(collection).deleteOne({ _id: personId }, true);
-  console.log(result)
-  if(result.deletedCount > 0){
-    res.status(200).send();
-  } else {
-    res.status(500).json('An error occurred while deleting the person.');
-  }
+    const paddedId = req.params.id.padStart(24,'0');
+    tools.log(`${collection}/DELETE document ${paddedId}:`);
+    
+    if (!ObjectId.isValid(req.params.id)) {
+      tools.log('    400 - Invalid ID provided.');
+      res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
+      return false;
+    }
+    const personId = new ObjectId(paddedId);
+  
+    try {
+      const result = await mongoDb.getDb()
+        .db('TempleWork')
+        .collection(collection)
+        .deleteOne(
+          { _id: personId }
+          , true
+        );
+  
+      if(result) {
+        tools.log(`    200 - Success - Documents deleted = ${result.deletedCount}`);
+        res.setHeader('Content-Type', 'application/json'); 
+        res.status(200).json(result);
+      }
+    } catch (err) {
+      console.log(`    500 - ${err.message}`);
+      res.status(500).json('An error occurred while deleting the data.');
+      return false;
+    }  
   
 };
   

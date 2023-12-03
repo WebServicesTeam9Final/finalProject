@@ -1,0 +1,5 @@
+{
+    "modulePathIgnorePatterns": ["excluded_tests"],
+    "verbose": true,
+    "forceExit": true
+}

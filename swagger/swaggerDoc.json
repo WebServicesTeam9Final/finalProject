@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.2",
+    "version": "1.0.3",
     "title": "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
     "description": "A temple work REST API developed by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
   },
@@ -399,6 +399,9 @@
         ],
         "summary": "Delete a single completed record.",
         "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -762,6 +765,9 @@
         ],
         "summary": "Delete a single completed record.",
         "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1029,6 +1035,9 @@
         ],
         "summary": "Delete a single temple record.",
         "description": "Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1190,6 +1199,9 @@
         ],
         "summary": "Delete a single user record.",
         "description": "Deletes a user record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a user record was actually deleted.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",

@@ -1,4 +1,5 @@
 const routes = require('express').Router();
+const tools = require('../tools');
 
 let swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../swagger/swaggerDoc.json');
@@ -17,8 +18,7 @@ function swDoc() {
   let result = null;
   try {
     result = swaggerUi.setup(swaggerDocument);
-    console.log('\nInitialized API documentation interface.');
-    
+    tools.log('\nInitialized API documentation interface.'); 
   } catch (err) {
     console.log(`${err.name}: ${err.message}`);
   }
