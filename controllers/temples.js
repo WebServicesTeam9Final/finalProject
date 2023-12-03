@@ -145,7 +145,7 @@ const addTemple = async (req, res) => {
     }
   */
 
-  console.log(`${collection}/POST document:`);
+  tools.log(`${collection}/POST document:`);
   const temple = {
     templeName: req.body.templeName,
     templeAddress: req.body.templeAddress
@@ -214,7 +214,6 @@ const updateTemple = async (req, res) => {
   };
   
   const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: templeId }, updatedTemple);
-  console.log(result)
   if(result.modifiedCount > 0){
     tools.log(`    204 - SUCCESS`);
     res.status(204).send();

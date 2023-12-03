@@ -41,7 +41,7 @@ const getOne = async (req, res, next) => {
   const paddedId = req.params.id.padStart(24,'0');
   tools.log(`${collection}/GET document ${paddedId}:`);
   if (!ObjectId.isValid(req.params.id)) {
-    console.log('    400 - Invalid ID provided.');
+    tools.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
     return false;
   }
@@ -60,7 +60,7 @@ const getOne = async (req, res, next) => {
       res.setHeader('Content-Type', 'application/json');  
       res.status(200).json(result); 
     } else {
-      console.log(`    404 - Not found.`);
+      tools.log(`    404 - Not found.`);
       if (!res.headersSent) {
         res.setHeader('Content-Type', 'text/plain');  
         res.status(404).send('Not found.');  
@@ -162,7 +162,8 @@ const updateUser = async (req, res) => {
 
   tools.log(`${collection}/PUT document ${req.params.id}:`);
   if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid user id to update a user.');
+    tools.log(`    400 - Invalid ID provided.`);
+    res.status(400).json('Must use a valid user id to update a user.');
   }
   const userId = new ObjectId(req.params.id);
   const updatedUser = {
@@ -170,7 +171,6 @@ const updateUser = async (req, res) => {
     userPassword: req.body.userPassword
   };
   const result = await mongoDb.getDb().db('TempleWork').collection('users').replaceOne({ _id: userId }, updatedUser);
-  console.log(result)
   if(result.modifiedCount > 0){
     tools.log(`    204 - SUCCESS`);
     res.status(204).send();
@@ -212,7 +212,7 @@ const deleteData = async (req, res, next) => {
     tools.log(`${collection}/DELETE document ${paddedId}:`);
     
     if (!ObjectId.isValid(req.params.id)) {
-      console.log('    400 - Invalid ID provided.');
+      tools.log('    400 - Invalid ID provided.');
       res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
       return false;
     }

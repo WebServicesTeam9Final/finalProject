@@ -46,7 +46,7 @@ const getAll = async (req, res, next) => {
         res.status(200).json(lists); 
       });
   } catch (err) {
-    tools.log(`    500 - ${err.name}: ${err.message}`);
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.setHeader('Content-Type', 'application/json');
     res.status(500).json('Internal server or database error.');
     return false;
@@ -181,6 +181,7 @@ const addCompletedPerson = async (req, res) => {
   if(result.acknowledged){
     res.status(201).json(result);
   } else {
+    console.log(`    500 - ${res.error}`);
     res.status(500).json('An error occurred while creating the person.');
   }
 };
@@ -234,7 +235,8 @@ const updateCompletedPerson = async (req, res) => {
 
   tools.log(`${collection}/PUT document ${req.params.id}:`);
   if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid id to update a person.');
+    tools.log(`    400 - Invalid ID.`);
+    res.status(400).json('Must use a valid id to update a person.');
   }
   const personId = new ObjectId(req.params.id);
   const updatedPerson = {
@@ -252,9 +254,11 @@ const updateCompletedPerson = async (req, res) => {
   const result = await mongoDb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
   tools.log(result)
   if(result.modifiedCount > 0){
+    tools.log(`    204 - SUCCESS`);
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'An error occurred while updating the person.');
+    console.log(`    500 - ${res.error}`);
+    res.status(500).json('An error occurred while updating the person.');
   }
 };
 
@@ -290,7 +294,7 @@ const deleteData = async (req, res, next) => {
   tools.log(`${collection}/DELETE document ${paddedId}:`);
   
   if (!ObjectId.isValid(req.params.id)) {
-    console.log('    400 - Invalid ID provided.');
+    tools.log('    400 - Invalid ID provided.');
     res.status(400).send('You must provide a valid ID (24-digit hexadecimal string).');
     return false;
   }

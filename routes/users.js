@@ -10,7 +10,7 @@ const usersCtrl = require('../controllers/users');
 // routes.get('/', usersCtrl.getAll); 
 routes.get('/:id', usersCtrl.getOne);
 routes.post('/', usersCtrl.addUser);
-routes.put('/:id', usersCtrl.addUser);
+routes.put('/:id', usersCtrl.updateUser);
 routes.delete('/:id', usersCtrl.deleteData);
 
 module.exports = routes;
