@@ -6,10 +6,10 @@ const config = {
     //authorization configuration
     authRequired: true,
     auth0Logout: true,
-    secret: process.env.SESSION_SECRET,
-    baseURL: '',
-    clientID: '',
-    issuerBaseURL: ''
+    secret: process.env.SECRET,
+    baseURL: process.env.BASE_URL,
+    clientID: process.env.CLIENT_ID,
+    issuerBaseURL: process.env.ISSUER_BASE_URL
 };
 router.use(auth(config));
 

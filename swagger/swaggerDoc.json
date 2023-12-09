@@ -441,6 +441,77 @@
         }
       }
     },
+    "/completed/?gender=Female": {
+      "get": {
+        "tags": [
+          "Completed"
+        ],
+        "summary": "Return the entire list of completed records.",
+        "description": "Returns all completed records in the collection. No filtering is applied.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All completed records are successfully fetched and returned in an array.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "0123456789abcdef01234567"
+                  },
+                  "fname": {
+                    "type": "string",
+                    "example": "Joseph"
+                  },
+                  "lname": {
+                    "type": "string",
+                    "example": "Smith"
+                  },
+                  "gender": {
+                    "type": "string",
+                    "example": "Male"
+                  },
+                  "birthday": {
+                    "type": "string",
+                    "example": "23-Dec-1805"
+                  },
+                  "baptism": {
+                    "type": "string",
+                    "example": "15-May-1829"
+                  },
+                  "confirmation": {
+                    "type": "string",
+                    "example": "15-May-1829"
+                  },
+                  "initiatory": {
+                    "type": "string",
+                    "example": "5-May-1842"
+                  },
+                  "endowment": {
+                    "type": "string",
+                    "example": "5-May-1842"
+                  },
+                  "sealing": {
+                    "type": "string",
+                    "example": "28-May-1843"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server or database error."
+          }
+        }
+      }
+    },
     "/family-members/": {
       "get": {
         "tags": [
@@ -1136,19 +1207,21 @@
         "tags": [
           "Users"
         ],
-        "summary": "Add a single user record.",
-        "description": "Adds a single user record using information provided in a JSON body.",
+        "summary": "Update a single user record.",
+        "description": "Updates the user record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a user record.",
+            "format": "hex"
           },
           {
             "name": "record",
             "in": "body",
-            "description": "A valid JSON object with required data elements populated.",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
             "format": "json",
             "schema": {
               "type": "object",
@@ -1166,24 +1239,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created - A single user record is added with the data given. The return result provides the newly assigned ID number.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "acknowledged": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "insertedId": {
-                  "type": "string",
-                  "example": "<hexadecimal string>"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+          "204": {
+            "description": "Success - The user record identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
           },
           "422": {
             "description": "Invalid or missing data error."

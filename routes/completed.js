@@ -10,5 +10,6 @@ routes.get('/:id', completedCtrl.getOne);
 routes.post('/', completedCtrl.addCompletedPerson);
 routes.put('/:id', completedCtrl.updateCompletedPerson);
 routes.delete('/:id', completedCtrl.deleteData);
+routes.get('/?gender=Female', completedCtrl.getAll);
 
 module.exports = routes;

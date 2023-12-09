@@ -322,10 +322,35 @@ const deleteData = async (req, res, next) => {
 };
 
 
+//Specialized GET requests
+const getAllGirls = async (req, res, next) => {
+  query = { gender: "Female" };
+  tools.log(`${collection}/GET ALL: `);
+    try {
+      const result = await mongoDb.getDb()
+        .db()
+        .collection(collection)
+        .find(query);
+      
+      result.toArray()
+        .then( (lists) => {
+          tools.log(`    200 - OK`);
+          res.setHeader('Content-Type', 'application/json');  
+          res.status(200).json(lists); 
+        });
+    } catch (err) {
+      console.log(`    500 - ${err.name}: ${err.message}`);
+      res.setHeader('Content-Type', 'application/json');
+      res.status(500).json('Internal server or database error.');
+      return false;
+    }
+};
+
 module.exports = {
   getAll,
   getOne,
   deleteData,
   addCompletedPerson, 
-  updateCompletedPerson
+  updateCompletedPerson,
+  getAllGirls
 };
