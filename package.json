@@ -1,7 +1,7 @@
 {
   "name": "templetracker",
-  "version": "1.0.3",
-  "description": "",
+  "version": "1.0.4",
+  "description": "A backend API to help with temple",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
