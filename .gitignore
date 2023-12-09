@@ -1,4 +1,5 @@
 node_modules
+excluded_tests
 coverage
 .env
 .vscode

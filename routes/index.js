@@ -22,12 +22,11 @@ const config = {
     clientID: process.env.CLIENT_ID,
     issuerBaseURL: process.env.ISSUER_BASE_URL
 };
-router.use(auth(config));
-tools.log('OpenID Connect initialized.');
 
-router.get('/', (req, res) =>{
-  res.send(req.oidc.isAutheticated() ? 'Logged in' : 'Logged out');
-})
+if (process.env.npm_lifecycle_event !== 'test') {
+  router.use(auth(config));
+  tools.log('OpenID Connect initialized.');
+}
 
 // Establish routes.
 
@@ -48,5 +47,8 @@ router.use('/temples', temples);
 
 // USERS
 router.use('/users', users)
+
+// req.isAuthenticated is provided from the auth router
+router.get('/status', rootCtrl.statusRoute);
 
 module.exports = router;

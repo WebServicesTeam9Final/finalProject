@@ -8,9 +8,17 @@ const superTest = require('supertest');
 const { expect } = require('@jest/globals');
 const request = superTest(serverApp);
 
+// Mock the OAuth for the STATUS route.
+jest.mock("express-openid-connect", () => (
+  {
+    requiresAuth: () => (_, __, next) => next()
+  }
+));
+
 // This will hold the added test document ID so that it can be updated and later deleted. 
 // Net result should be zero documents added to the collection.
 // More in-depth testing would test to make sure the data is in the expected format.
+
 let returnId = "[OBJECT_ID]";
 
 const thisDate = new Date();
@@ -260,5 +268,18 @@ describe('Check HTTP status for the following HTTP requests:', () => {
     });
   });
 
+
+  //// STATUS ROUTE
+  describe('/STATUS endpoint route: ', () => {
+    
+    // GET
+    test(' - Receives HTTP 200 upon GET /status', async () => {
+      const res = await request.get('/status');
+
+      expect(res.statusCode).toBe(200);
+      expect(res.header['content-type']).toBe('application/json; charset=utf-8');
+    });
+    
+  });
 
 });
