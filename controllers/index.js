@@ -35,7 +35,7 @@ try {
   }
   // Moving on... 
   let theStatus = {
-    "loggedIn": req.oidc.isAuthenticated()
+    "loggedIn": req.oidc.isAuthenticated() || false
   };
   tools.log(`    200 - OK`);
   res.status(200).json(theStatus);
