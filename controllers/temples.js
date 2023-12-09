@@ -151,13 +151,16 @@ const addTemple = async (req, res) => {
     templeAddress: req.body.templeAddress
   };
   //db name subject to change after mongodb setup
-  const result = await mongoDb.getDb().db('TempleWork').collection(collection).insertOne(temple);
-  if(result.acknowledged){
-    tools.log(`    201 - SUCCESS`);
-    res.status(201).json(result);
-  } else {
-    console.log(`    500 - ERROR: ${response.error}`);
+  try {
+    const result = await mongoDb.getDb().db('TempleWork').collection(collection).insertOne(temple);
+    if(result.acknowledged){
+      tools.log(`    201 - SUCCESS`);
+      res.status(201).json(result);
+    }
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while creating the temple.');
+    return false;
   }
 };
 
@@ -213,13 +216,16 @@ const updateTemple = async (req, res) => {
     templeAddress: req.body.templeAddress
   };
   
-  const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: templeId }, updatedTemple);
-  if(result.modifiedCount > 0){
-    tools.log(`    204 - SUCCESS`);
-    res.status(204).send();
-  } else {
-    console.log(`    500 - ERROR: ${response.error}`);
+  try {
+    const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: templeId }, updatedTemple);
+    if(result.modifiedCount > 0){
+      tools.log(`    204 - SUCCESS`);
+      res.status(204).send();
+    }
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while updating the temple.');
+    return false;
   }
 };
   
@@ -273,7 +279,7 @@ const deleteData = async (req, res, next) => {
         res.status(200).json(result);
       }
     } catch (err) {
-      console.log(`    500 - ${err.message}`);
+      console.log(`    500 - ${err.name}: ${err.message}`);
       res.status(500).json('An error occurred while deleting the data.');
       return false;
     }  

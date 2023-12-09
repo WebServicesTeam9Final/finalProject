@@ -57,7 +57,7 @@ const validateUser = (req, res, next) => {
     };
     validator(req.body, validationRules, {}, (err, status) => {
         if (!status){
-            res.status(412).send({
+            res.status(422).send({
                 success: false,
                 message: 'Validation failed',
                 data: err
