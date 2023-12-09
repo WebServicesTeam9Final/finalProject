@@ -40,9 +40,10 @@ try {
   tools.log(`    200 - OK`);
   res.status(200).json(theStatus);
 } catch (err) {
-  console.log(`    500 - ${err.message}`);
+  console.log(`    500 - ${err.name}: ${err.message}`);
   res.setHeader('Content-Type', 'text/plain'); 
   res.status(500).send("Internal server error.");
+  return false;
 }
 }
 
@@ -53,9 +54,9 @@ const defaultRoute = async(req, res) => {
       #swagger.responses[200] = { 
         description: "Returns the version information for the API.",
         schema: {
-          name: "finalproject",
-          prettyName: "CSE-341 Team 9 Final Project REST API",
-          version: "1.0.0",
+          name: "templetracker",
+          prettyName: "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
+          version: "<major>.<minor>.<patch>",
           author: "Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
         } 
       }
@@ -72,6 +73,7 @@ const defaultRoute = async(req, res) => {
     res.setHeader('Content-Type', 'application/text');  
     res.status(500).send('Internal server error.');
     console.log(`    500 - ${err.name}: ${err.message}`);
+    return false;
   }
 }
 

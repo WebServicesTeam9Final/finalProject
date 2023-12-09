@@ -3,7 +3,7 @@
 const routes = require('express').Router();
 const templesCtrl = require('../controllers/temples');
 const { requiresAuth } = require('express-openid-connect');
-// const validation = require("../middleware/validate");
+const validation = require("../middleware/validate");
 
 // Allow All Read Access
 routes.get('/', templesCtrl.getAll);

@@ -35,15 +35,15 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "example": "finalproject"
+                  "example": "templetracker"
                 },
                 "prettyName": {
                   "type": "string",
-                  "example": "CSE-341 Team 9 Final Project REST API"
+                  "example": "Temple Tracker\nCSE-341 Team 9 Final Project REST API"
                 },
                 "version": {
                   "type": "string",
-                  "example": "1.0.0"
+                  "example": "<major>.<minor>.<patch>"
                 },
                 "author": {
                   "type": "string",
@@ -1319,6 +1319,22 @@
           "500": {
             "description": "Internal server or database error."
           }
+        }
+      }
+    }
+  },
+  "components": {
+    "securityDefinitions": {
+      "OAuth2": {
+        "type": "oauth2",
+        "description": "This API uses OAuth 2.0 with the authorization code flow.",
+        "flow": "accessCode",
+        "authorizationUrl": "https://finalwebservices.onrender.com/login/",
+        "tokenUrl": "https://finalwebservices.onrender.com/oauth/token",
+        "scopes": {
+          "read": "Grants read access",
+          "write": "Grants write access",
+          "admin": "Grants read and write access to administrative information"
         }
       }
     }

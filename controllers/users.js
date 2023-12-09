@@ -110,13 +110,16 @@ const addUser = async (req, res) => {
     userName: req.body.userName,
     userPassword: req.body.userPassword
   };
-  const result = await mongoDb.getDb().db('TempleWork').collection('users').insertOne(user);
-  if(result.acknowledged){
-    tools.log(`    201 - SUCCESS`);
-    res.status(201).json(result);
-  } else {
-    console.log(`    500 - ERROR: ${response.error}`);
+  try {
+    const result = await mongoDb.getDb().db('TempleWork').collection(collection).insertOne(user);
+    if(result.acknowledged){
+      tools.log(`    201 - SUCCESS`);
+      res.status(201).json(result);
+    } 
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while creating the user.');
+    return false;
   }
 };
 
@@ -170,13 +173,16 @@ const updateUser = async (req, res) => {
     userName: req.body.userName,
     userPassword: req.body.userPassword
   };
-  const result = await mongoDb.getDb().db('TempleWork').collection('users').replaceOne({ _id: userId }, updatedUser);
-  if(result.modifiedCount > 0){
-    tools.log(`    204 - SUCCESS`);
-    res.status(204).send();
-  } else {
-    console.log(`    500 - ERROR: ${response.error}`);
+  try {
+    const result = await mongoDb.getDb().db('TempleWork').collection(collection).replaceOne({ _id: userId }, updatedUser);
+    if(result.modifiedCount > 0){
+      tools.log(`    204 - SUCCESS`);
+      res.status(204).send();
+    }
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while updating the user.');
+    return false;
   }
 };
   
@@ -233,7 +239,7 @@ const deleteData = async (req, res, next) => {
         res.status(200).json(result);
       }
     } catch (err) {
-      console.log(`    500 - ${err.message}`);
+      console.log(`    500 - ${err.name}: ${err.message}`);
       res.status(500).json('An error occurred while deleting the data.');
       return false;
     }  

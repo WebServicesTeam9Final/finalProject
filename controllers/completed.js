@@ -119,7 +119,7 @@ const getOne = async (req, res, next) => {
       }
     }
   } catch (err) {
-    tools.log(`    500 - ${err.name}: ${err.message}`);
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).send('Internal server or database error.');
     return false;
   }
@@ -177,12 +177,15 @@ const addCompletedPerson = async (req, res) => {
       sealing: req.body.sealing
   };
   //db name subject to change after mongodb setup
-  const result = await mongoDb.getDb().db('TempleWork').collection('completed').insertOne(completed);
-  if(result.acknowledged){
-    res.status(201).json(result);
-  } else {
-    console.log(`    500 - ${res.error}`);
+  try {
+    const result = await mongoDb.getDb().db('TempleWork').collection('completed').insertOne(completed);
+    if(result.acknowledged){
+      res.status(201).json(result);
+    } 
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while creating the person.');
+    return false;
   }
 };
 
@@ -251,14 +254,17 @@ const updateCompletedPerson = async (req, res) => {
       sealing: req.body.sealing
   };
   //db name subject to change after mongodb setup
-  const result = await mongoDb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
-  tools.log(result)
-  if(result.modifiedCount > 0){
-    tools.log(`    204 - SUCCESS`);
-    res.status(204).send();
-  } else {
-    console.log(`    500 - ${res.error}`);
+  try {
+    const result = await mongoDb.getDb().db('TempleWork').collection('completed').replaceOne({ _id: personId }, updatedPerson);
+    tools.log(result)
+    if(result.modifiedCount > 0){
+      tools.log(`    204 - SUCCESS`);
+      res.status(204).send();
+    }
+  } catch (err) {
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while updating the person.');
+    return false;
   }
 };
 
@@ -315,7 +321,7 @@ const deleteData = async (req, res, next) => {
       res.status(200).json(result);
     }
   } catch (err) {
-    console.log(`    500 - ${err.message}`);
+    console.log(`    500 - ${err.name}: ${err.message}`);
     res.status(500).json('An error occurred while deleting the data.');
     return false;
   }  
