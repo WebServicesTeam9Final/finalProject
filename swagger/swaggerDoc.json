@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.3",
+    "version": "1.0.4",
     "title": "Temple Tracker\nCSE-341 Team 9 Final Project REST API",
     "description": "A temple work REST API developed by Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
   },
-  "host": "localhost:3000",
+  "host": "finalwebservices.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -48,6 +48,38 @@
                 "author": {
                   "type": "string",
                   "example": "Ashlee Butterfield, Madison Lutz, Jonas Nunn, Mike Lewis"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error."
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "tags": [
+          "Status"
+        ],
+        "summary": "Provide status of whether user is logged in or out.",
+        "description": "This endpoint simply returns a single boolean field indicating if a user is logged in or out.",
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns whether a user is logged in or out.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "loggedIn": {
+                  "type": "string",
+                  "example": "<true | false>"
                 }
               },
               "xml": {
@@ -1136,19 +1168,21 @@
         "tags": [
           "Users"
         ],
-        "summary": "Add a single user record.",
-        "description": "Adds a single user record using information provided in a JSON body.",
+        "summary": "Update a single user record.",
+        "description": "Updates the user record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "A valid and unique 24-digit hexadecimal string that identifies a user record.",
+            "format": "hex"
           },
           {
             "name": "record",
             "in": "body",
-            "description": "A valid JSON object with required data elements populated.",
+            "description": "A valid JSON object populated with one or more data fields to be changed.",
             "format": "json",
             "schema": {
               "type": "object",
@@ -1166,24 +1200,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Created - A single user record is added with the data given. The return result provides the newly assigned ID number.",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "acknowledged": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "insertedId": {
-                  "type": "string",
-                  "example": "<hexadecimal string>"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
+          "204": {
+            "description": "Success - The user record identified by `id` is updated with the new data. No data is returned other than this status."
+          },
+          "400": {
+            "description": "Invalid ID provided."
+          },
+          "404": {
+            "description": "Not found."
           },
           "422": {
             "description": "Invalid or missing data error."

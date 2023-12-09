@@ -26,17 +26,16 @@ const config = {
 // ROOT ROUTE 
 router.get('/', rootCtrl.defaultRoute);
 
-
-// Establish routes.
-// API DOCS
-router.use('/api-docs', apiDocs);
-
 if (process.env.npm_lifecycle_event !== 'test') {
   router.use(auth(config));
   tools.log('OpenID Connect initialized.');
 }
 
-router.get('/status', rootCtrl.statusRoute);
+// Establish routes.
+// API DOCS
+router.use('/api-docs', apiDocs);
+
+
 // COMPLETED
 router.use('/completed', completed);
 // FAMILY MEMBERS
@@ -46,5 +45,7 @@ router.use('/temples', temples);
 // USERS
 router.use('/users', users)
 
+// A simple status route to show if a user is logged in or out.
+router.get('/status', rootCtrl.statusRoute);
 
 module.exports = router;
