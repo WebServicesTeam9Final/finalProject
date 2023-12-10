@@ -130,7 +130,7 @@ const getOne = async (req, res, next) => {
 const addFamilyMember = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Add a single family member record.'
-    #swagger.description = 'Adds a single family member record using information provided in a JSON body.'
+    #swagger.description = '<b>Must be authorized to use.</b> Adds a single family member record using information provided in a JSON body.'
     #swagger.tags = ['Family Members']
     #swagger.parameters['record'] = {
       in: 'body',
@@ -195,7 +195,7 @@ const addFamilyMember = async (req, res) => {
 const updateFamilyMember = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Update a single family member record.'
-    #swagger.description = 'Updates the family member record identified by `id` using information provided in a JSON body.'
+    #swagger.description = '<b>Must be authorized to use.</b> Updates the family member record identified by `id` using information provided in a JSON body.'
     #swagger.tags = ['Family Members']
     #swagger.parameters['id'] = {
       in: 'path',
@@ -273,7 +273,7 @@ const updateFamilyMember = async (req, res) => {
 const deleteData = async (req, res, next) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Delete a single completed record.'
-    #swagger.description = 'Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
+    #swagger.description = '<b>Must be authorized to use.</b> Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.'
     #swagger.tags = ['Family Members']
     #swagger.parameters['id'] = {
       in: 'path',

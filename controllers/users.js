@@ -78,7 +78,7 @@ const getOne = async (req, res, next) => {
 const addUser = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Add a single user record.'
-    #swagger.description = 'Adds a single user record using information provided in a JSON body.'
+    #swagger.description = '<b>Must be authorized to use.</b> Adds a single user record using information provided in a JSON body.'
     #swagger.tags = ['Users']
     #swagger.parameters['record'] = {
       in: 'body',
@@ -128,7 +128,7 @@ const addUser = async (req, res) => {
 const updateUser = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Update a single user record.'
-    #swagger.description = 'Updates the user record identified by `id` using information provided in a JSON body.'
+    #swagger.description = '<b>Must be authorized to use.</b> Updates the user record identified by `id` using information provided in a JSON body.'
     #swagger.tags = ['Users']
     #swagger.parameters['id'] = {
       in: 'path',
@@ -191,7 +191,7 @@ const updateUser = async (req, res) => {
 const deleteData = async (req, res, next) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Delete a single user record.'
-    #swagger.description = 'Deletes a user record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a user record was actually deleted.'
+    #swagger.description = '<b>Must be authorized to use.</b> Deletes a user record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a user record was actually deleted.'
     #swagger.tags = ['Users']
     #swagger.parameters['id'] = {
       in: 'path',

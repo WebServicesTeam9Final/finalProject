@@ -117,7 +117,7 @@ const getOne = async (req, res, next) => {
 const addTemple = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Add a single temple record.'
-    #swagger.description = 'Adds a single temple record using information provided in a JSON body.'
+    #swagger.description = '<b>Must be authorized to use.</b> Adds a single temple record using information provided in a JSON body.'
     #swagger.tags = ['Temples']
     #swagger.parameters['record'] = {
       in: 'body',
@@ -169,7 +169,7 @@ const addTemple = async (req, res) => {
 const updateTemple = async (req, res) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Update a single temple record.'
-    #swagger.description = 'Updates the temple record identified by `id` using information provided in a JSON body.'
+    #swagger.description = '<b>Must be authorized to use.</b> Updates the temple record identified by `id` using information provided in a JSON body.'
     #swagger.tags = ['Temples']
     #swagger.parameters['id'] = {
       in: 'path',
@@ -234,7 +234,7 @@ const updateTemple = async (req, res) => {
 const deleteData = async (req, res, next) => {
   /*SWAGGER DOCUMENTATION  
     #swagger.summary = 'Delete a single temple record.'
-    #swagger.description = 'Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.'
+    #swagger.description = '<b>Must be authorized to use.</b> Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.'
     #swagger.tags = ['Temples']
     #swagger.parameters['id'] = {
       in: 'path',

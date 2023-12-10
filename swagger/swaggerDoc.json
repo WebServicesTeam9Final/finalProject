@@ -182,7 +182,7 @@
           "Completed"
         ],
         "summary": "Add a single completed record.",
-        "description": "Adds a single completed record using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Adds a single completed record using information provided in a JSON body.",
         "parameters": [
           {
             "name": "record",
@@ -349,7 +349,7 @@
           "Completed"
         ],
         "summary": "Update a single completed record.",
-        "description": "Updates the completed record identified by `id` using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Updates the completed record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
@@ -430,7 +430,7 @@
           "Completed"
         ],
         "summary": "Delete a single completed record.",
-        "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
+        "description": "<b>Must be authorized to use.</b> Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
         "produces": [
           "application/json"
         ],
@@ -548,7 +548,7 @@
           "Family Members"
         ],
         "summary": "Add a single family member record.",
-        "description": "Adds a single family member record using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Adds a single family member record using information provided in a JSON body.",
         "parameters": [
           {
             "name": "record",
@@ -715,7 +715,7 @@
           "Family Members"
         ],
         "summary": "Update a single family member record.",
-        "description": "Updates the family member record identified by `id` using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Updates the family member record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
@@ -796,7 +796,7 @@
           "Family Members"
         ],
         "summary": "Delete a single completed record.",
-        "description": "Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
+        "description": "<b>Must be authorized to use.</b> Deletes a completed record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a completed record was actually deleted.",
         "produces": [
           "application/json"
         ],
@@ -890,7 +890,7 @@
           "Temples"
         ],
         "summary": "Add a single temple record.",
-        "description": "Adds a single temple record using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Adds a single temple record using information provided in a JSON body.",
         "parameters": [
           {
             "name": "record",
@@ -1009,7 +1009,7 @@
           "Temples"
         ],
         "summary": "Update a single temple record.",
-        "description": "Updates the temple record identified by `id` using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Updates the temple record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
@@ -1066,7 +1066,7 @@
           "Temples"
         ],
         "summary": "Delete a single temple record.",
-        "description": "Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.",
+        "description": "<b>Must be authorized to use.</b> Deletes a temple record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a temple record was actually deleted.",
         "produces": [
           "application/json"
         ],
@@ -1169,7 +1169,7 @@
           "Users"
         ],
         "summary": "Update a single user record.",
-        "description": "Updates the user record identified by `id` using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Updates the user record identified by `id` using information provided in a JSON body.",
         "parameters": [
           {
             "name": "id",
@@ -1222,7 +1222,7 @@
           "Users"
         ],
         "summary": "Delete a single user record.",
-        "description": "Deletes a user record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a user record was actually deleted.",
+        "description": "<b>Must be authorized to use.</b> Deletes a user record identified by `id`. If `id` does not exist, no action is taken and no error occurs. Check the `deletedCount` attribute in the response to determine if a user record was actually deleted.",
         "produces": [
           "application/json"
         ],
@@ -1271,7 +1271,7 @@
           "Users"
         ],
         "summary": "Add a single user record.",
-        "description": "Adds a single user record using information provided in a JSON body.",
+        "description": "<b>Must be authorized to use.</b> Adds a single user record using information provided in a JSON body.",
         "parameters": [
           {
             "name": "record",
